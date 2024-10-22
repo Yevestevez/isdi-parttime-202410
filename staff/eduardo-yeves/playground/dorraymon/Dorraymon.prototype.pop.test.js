@@ -8,26 +8,10 @@ Dorraymon.prototype.pop = function () {
     }
     var lastElement = this[this.length - 1]
     this.length--
-    this[this.length] = undefined
+    delete this[this.length]
     return lastElement
 }
 
-/*
-Dorraymon.prototype.pop = function () {
-    if (this.length <= 0) {
-        return undefined
-    }
-    var lastElement = this[this.length - 1]
-    this.length--
-    var newObject = new Dorraymon
-    for (var i = 0; i < this.length; i++) {
-        newObject[i] = this[i]
-    }
-    newObject.length = this.length
-    this = newObject // Entiendo que no es posible sustituir el objeto del método actual por un objeto nuevo
-    return lastElement
-}
-*/
 
 console.log('TEST Dorraymon.prototype.pop')
 
