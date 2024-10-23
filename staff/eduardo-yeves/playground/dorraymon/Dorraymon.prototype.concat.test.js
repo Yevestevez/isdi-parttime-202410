@@ -2,27 +2,6 @@ function Dorraymon() {
     this.length = 0
 }
 
-/* Válido solo para concatenar Dorraymon con Dorraymon
-Dorraymon.prototype.concat = function () {
-    var result = new Dorraymon
-    for (var i = 0; i < this.length; i++) {
-        result[i] = this[i]
-        result.length++
-    }
-
-    for (var j = 0; j < arguments.length; j++) {
-        var values = arguments[j]
-
-        for (var i = 0; i < values.length; i++) {
-            result[result.length] = values[i]
-            result.length++
-        }
-    }
-
-    return result
-}
-*/
-
 Dorraymon.prototype.concat = function () {
     var result = new Dorraymon
     for (var i = 0; i < this.length; i++) {
@@ -31,14 +10,14 @@ Dorraymon.prototype.concat = function () {
     }
     for (var j = 0; j < arguments.length; j++) {
         var values = arguments[j]
-        if (arguments[j] instanceof Dorraymon === false) {
-            result[i] = arguments
-            result.length++
-        } else {
+        if (values instanceof Dorraymon) {
             for (var i = 0; i < values.length; i++) {
                 result[result.length] = values[i]
                 result.length++
             }
+        } else {
+            result[result.length] = values
+            result.length++
         }
     }
     return result
@@ -146,7 +125,7 @@ console.log(fruits)
 console.log(coffee)
 // ['expresso', 'capuccino']
 console.log(food)
-// Dorraymon { 0: 'apple', 1: 'orange', 2: 'lemon', 3: 'expresso', 4: 'capuccino', length: 5 }
+// Dorraymon { 0: 'apple', 1: 'orange', 2: 'lemon', 3: ['expresso', 'capuccino'], length: 4 }
 
 
 console.log('CASE merge dorraymon with non-dorraymon element (object)')
@@ -179,10 +158,27 @@ veggies[1] = 'onion'
 veggies.length = 2
 var food = fruits.concat(desserts, veggies)
 console.log(fruits)
-// // Dorraymon { 0: 'apple', 1: 'orange', 2: 'lemon', length: 3 }
+// Dorraymon { 0: 'apple', 1: 'orange', 2: 'lemon', length: 3 }
 console.log(desserts)
 // { 0: 'cake', 1: 'brownie' }
 console.log(veggies)
 // Dorraymon { 0: 'lettuce', 1: 'onion', length: 2 }
 console.log(food)
 // Dorraymon {0: 'apple', 1: 'orange', 2: 'lemon', 3: { 0: 'cake', 1: 'brownie' }, 4: 'letucce', 5: 'onion', length: 6 }
+
+
+console.log('CASE merge dorraymon with string')
+
+var fruits = new Dorraymon
+fruits[0] = 'apple'
+fruits[1] = 'orange'
+fruits[2] = 'lemon'
+fruits.length = 3
+var dessert = 'cake'
+var food = fruits.concat(dessert)
+console.log(fruits)
+// Dorraymon { 0: 'apple', 1: 'orange', 2: 'lemon', length: 3 }
+console.log(dessert)
+// 'cake'
+console.log(food)
+// Dorraymon { 0: 'apple', 1: 'orange', 2: 'lemon', 3: 'cake', length: 4 } 
