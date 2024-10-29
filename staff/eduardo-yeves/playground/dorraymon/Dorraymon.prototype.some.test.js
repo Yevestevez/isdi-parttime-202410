@@ -3,7 +3,7 @@ function Dorraymon() {
 }
 
 Dorraymon.prototype.some = function (condition) {
-    for (i = 0; i < this.length; i++) {
+    for (var i = 0; i < this.length; i++) {
         var element = this[i]
 
         var fulfills = condition(element)
