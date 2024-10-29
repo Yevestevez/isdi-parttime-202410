@@ -116,10 +116,24 @@ registerForm.appendChild(registerFormSubmitButton)
 
 registerForm.onsubmit = function (event) {
     event.preventDefault()
+
     var name = registerFormNameInput.value
     var email = registerFormEmailInput.value
     var username = registerFormUsernameInput.value
     var password = registerFormPasswordInput.value
+
+    var found = users.some(function (user) {
+        if (user.email === email || user.username === username)
+            return true
+
+        return false
+    })
+
+    if (found) {
+        alert('user already exists')
+
+        return
+    }
 
     var user = {}
     user.name = name
@@ -191,34 +205,32 @@ loginForm.appendChild(loginFormSubmitButton)
 loginForm.onsubmit = function (event) {
     event.preventDefault()
 
-    event.preventDefault()
     var username = loginFormUsernameInput.value
     var password = loginFormPasswordInput.value
 
-    var userInput = {}
-    userInput.username = username
-    userInput.password = password
+    var user = users.find(function (user) {
+        if (user.username === username && user.password === password)
+            return true
 
-    function verifyCredentials(user) {
-        return user.username === userInput.username && user.password === userInput.password
-    }
+        return false
+    })
 
-    var userFind = users.find(verifyCredentials)
-
-    if (userFind) {
-        body.removeChild(loginView)
-        body.appendChild(homeView)
-    } else {
+    if (user === undefined) {
         alert('wrong credentials')
-    }
-}
 
+        return
+    }
+
+    homeUser.innerText = 'Hello, ' + user.name + '!'
+
+    body.removeChild(loginView)
+    body.appendChild(homeView)
+}
 
 // link --> register
 var loginRegisterLink = document.createElement('a')
 loginRegisterLink.href = ''
 loginRegisterLink.innerText = 'Register'
-loginView.appendChild(loginRegisterLink)
 
 loginRegisterLink.onclick = function (event) {
     event.preventDefault()
@@ -226,11 +238,27 @@ loginRegisterLink.onclick = function (event) {
     body.removeChild(loginView)
     body.appendChild(registerView)
 }
+loginView.appendChild(loginRegisterLink)
+
 
 // home
 
 var homeView = document.createElement('main')
 
 var homeTitle = document.createElement('h2')
-homeTitle.innerText = 'Hola, Home!'
+homeTitle.innerText = 'Home'
 homeView.appendChild(homeTitle)
+
+var homeUser = document.createElement('h3')
+homeUser.innerText = 'Hello, User!'
+homeView.appendChild(homeUser)
+
+// logout button
+var homeLogoutButton = document.createElement('button')
+homeLogoutButton.innerText = 'Logout'
+homeView.appendChild(homeLogoutButton)
+
+homeLogoutButton.onclick = function () {
+    body.removeChild(homeView)
+    body.appendChild(loginView)
+}
