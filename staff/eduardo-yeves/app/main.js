@@ -1,15 +1,6 @@
-// data
+var body = document.body
 
-var users = []
-
-// maneras de llamar a body
-// var body = document.childNodes[1].childNodes[2]
-// var body = document.querySelector('body')
-var body = document.body // este método solo sirve para body y head
-
-var title = document.createElement('h1') // new HTMLHeadingElement
-//var titleText = new Text('Hola, App!')
-//title.appendChild(titleText)
+var title = document.createElement('h1')
 title.innerText = 'Hola, App!'
 body.appendChild(title)
 
@@ -22,7 +13,7 @@ var landingTitle = document.createElement('h2')
 landingTitle.innerText = 'Welcome!'
 landingView.appendChild(landingTitle)
 
-var landingIntro = document.createElement('p') // new HTMLParagraphElement
+var landingIntro = document.createElement('p')
 landingView.appendChild(landingIntro)
 
 var landingRegisterLink = document.createElement('a')
@@ -31,10 +22,10 @@ landingRegisterLink.innerText = 'Register'
 landingIntro.appendChild(landingRegisterLink)
 
 landingRegisterLink.onclick = function (event) {
-    event.preventDefault() // para que no recarge la página automáticamente
+    event.preventDefault()
 
-    body.removeChild(landingView) // eliminamos la vista landingView y ya no se muestra en pantalla
-    body.appendChild(registerView) // añadimos la vista registerView y se muestra en pantalla
+    body.removeChild(landingView)
+    body.appendChild(registerView)
 }
 
 var landingIntroOrText = new Text(' or ')
@@ -122,31 +113,18 @@ registerForm.onsubmit = function (event) {
     var username = registerFormUsernameInput.value
     var password = registerFormPasswordInput.value
 
-    var found = users.some(function (user) {
-        if (user.email === email || user.username === username)
-            return true
+    try {
+        registerUser(name, email, username, password)
 
-        return false
-    })
+        registerForm.reset()
 
-    if (found) {
-        alert('user already exists')
+        body.removeChild(registerView)
+        body.appendChild(loginView)
+    } catch (error) {
+        alert(error.message)
 
-        return
+        console.error(error)
     }
-
-    var user = {}
-    user.name = name
-    user.email = email
-    user.username = username
-    user.password = password
-
-    users.push(user)
-
-    registerForm.reset()
-
-    body.removeChild(registerView)
-    body.appendChild(loginView)
 }
 
 // link --> login
@@ -208,23 +186,20 @@ loginForm.onsubmit = function (event) {
     var username = loginFormUsernameInput.value
     var password = loginFormPasswordInput.value
 
-    var user = users.find(function (user) {
-        if (user.username === username && user.password === password)
-            return true
+    try {
+        var user = loginUser(username, password)
+        loginForm.reset()
 
-        return false
-    })
+        homeUser.innerText = 'Hello, ' + user.name + '!'
 
-    if (user === undefined) {
-        alert('wrong credentials')
+        body.removeChild(loginView)
+        body.appendChild(homeView)
 
-        return
+    } catch (error) {
+        alert(error.message)
+
+        console.error(error)
     }
-
-    homeUser.innerText = 'Hello, ' + user.name + '!'
-
-    body.removeChild(loginView)
-    body.appendChild(homeView)
 }
 
 // link --> register
