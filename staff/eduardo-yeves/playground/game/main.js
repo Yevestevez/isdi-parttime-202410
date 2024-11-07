@@ -1,31 +1,32 @@
-var root = new Thing(document.body.querySelector('#root'))
+const root = new Thing(document.body.querySelector('#root'))
 root.container.style.position = 'absolute'
+root.container.style.backgroundColor = 'red'
 
-var vampire = new Vampire(document.createElement('div'))
+const vampire = new Vampire(document.createElement('div'))
 root.add(vampire)
 vampire.setXY(0, 0)
 
-var wickedGarlic = new WickedGarlic(document.createElement('div'))
-root.add(wickedGarlic)
-wickedGarlic.setXY(300, 0)
+const garlic = new Garlic(document.createElement('div'))
+root.add(garlic)
+garlic.setXY(300, 0)
 
-var wickedGarlic2 = new WickedGarlic(document.createElement('div'))
-root.add(wickedGarlic2)
-wickedGarlic2.setXY(250, 100)
+const garlic2 = new Garlic(document.createElement('div'))
+root.add(garlic2)
+garlic2.setXY(250, 100)
 
-var wickedGarlic3 = new WickedGarlic(document.createElement('div'))
-root.add(wickedGarlic3)
-wickedGarlic3.setXY(300, 200)
+const garlic3 = new Garlic(document.createElement('div'))
+root.add(garlic3)
+garlic3.setXY(300, 200)
 
 /*
-// wickedGarlic throw function (WIP)
+// garlic throw function (WIP)
 
-// inicial wickedGarlic position
-function throwWickedGarlics() {
-    var newWickedGarlic = new WickedGarlic(document.createElement('div'))
+// inicial garlic position
+function throwGarlics() {
+    const newGarlic = new Garlic(document.createElement('div'))
 
-    var throwPosition = Math.floor(Math.random() * 4)
-    var throwX, throwY, throwDX, throwDY
+    const throwPosition = Math.floor(Math.random() * 4)
+    let throwX, throwY, throwDX, throwDY
 
     switch (throwPosition) {
         case 0: // from above
@@ -54,31 +55,31 @@ function throwWickedGarlics() {
             break
     }
 
-    root.appendChild(newWickedGarlic.container)
-    newWickedGarlic.setXY(throwX, throwY)
+    root.container.appendChild(newGarlic.container)
+    newGarlic.setXY(throwX, throwY)
 
-    // wickedGarlic movement
-    function wickedGarlicMovement() {
+    // garlic movement
+    function garlicMovement() {
         throwX += throwDX * 3
         throwY += throwDY * 3
 
-        newWickedGarlic.setX(throwX)
-        newWickedGarlic.setY(throwY)
+        newGarlic.setX(throwX)
+        newGarlic.setY(throwY)
 
 
-        // remove wickedGarlic if is out of the screen
+        // remove garlic if is out of the screen
         if (throwX < -80 || throwX > window.innerWidth + 80 || throwY < - 80 || throwY > window.innerWidth + 80) {
-            root.removeChild(newWickedGarlic.container)
+            root.container.removeChild(newGarlic.container)
             clearInterval(interval)
         }
     }
 
-    // wickedGarlic movement each 20ms
-    var interval = setInterval(wickedGarlicMovement, 20)
+    // garlic movement each 20ms
+    const interval = setInterval(garlicMovement, 20)
 
-    // generate wickedGarlic instances
-    setTimeout(throwWickedGarlics, 1000);
+    // generate garlic instances
+    setTimeout(throwGarlics, 1000);
 }
 
-throwWickedGarlics()
+throwGarlics()
 */

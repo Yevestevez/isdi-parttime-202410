@@ -1,48 +1,50 @@
-function Thing(container) {
-    this.x = 0
-    this.y = 0
+class Thing {
+    constructor(container) {
+        this.x = 0
+        this.y = 0
 
-    this.container = container
-    this.container.style.position = 'absolute'
-}
+        this.container = container
+        this.container.style.position = 'absolute'
+    }
 
-// setSize
-Thing.prototype.setSize = function (width, height) {
-    this.container.style.width = width + 'px'
-    this.container.style.height = height + 'px'
-}
+    // setSize method
+    setSize(width, height) {
+        this.container.style.width = width + 'px'
+        this.container.style.height = height + 'px'
+    }
 
-// setXY
-Thing.prototype.setXY = function (x, y) {
-    this.x = x
-    this.y = y
+    // setXY methods
+    setXY(x, y) {
+        this.x = x
+        this.y = y
 
-    this.container.style.left = this.x + 'px'
-    this.container.style.top = this.y + 'px'
-}
+        this.container.style.left = this.x + 'px'
+        this.container.style.top = this.y + 'px'
+    }
 
-Thing.prototype.setX = function (x) {
-    this.setXY(x, this.y)
-}
+    setX(x) {
+        this.setXY(x, this.y)
+    }
 
-Thing.prototype.setY = function (y) {
-    this.setXY(this.x, y)
-}
+    setY(y) {
+        this.setXY(this.x, y)
+    }
 
-// move
-Thing.prototype.move = function (dx, dy) {
-    this.setXY(this.x + dx, this.y + dy)
-}
+    // move methods
+    move(dx, dy) {
+        this.setXY(this.x + dx, this.y + dy)
+    }
 
-Thing.prototype.moveX = function (dx) {
-    this.move(dx, 0)
-}
+    moveX(dx) {
+        this.move(dx, 0)
+    }
 
-Thing.prototype.moveY = function (dy) {
-    this.move(0, dy)
-}
+    moveY(dy) {
+        this.move(0, dy)
+    }
 
-// add
-Thing.prototype.add = function (thing) {
-    this.container.appendChild(thing.container)
+    // add method
+    add(thing) {
+        this.container.appendChild(thing.container)
+    }
 }
