@@ -1,6 +1,4 @@
-// IIFE --> Immediately Invoked Function Expression
 var validate = (function () {
-
     function validateUsername(username) {
         if (typeof username !== 'string') throw new Error('invalid username type')
         if (username.length < 4) throw new Error('invalid username length')
@@ -21,10 +19,10 @@ var validate = (function () {
         if (email.length < 6) throw new Error('invalid email length')
     }
 
-    var validate = {
+    return {
         username: validateUsername,
         password: validatePassword,
         name: validateName,
         email: validateEmail
     }
-})() // Invocamos a la función directamente, las funciones internas no son accesibles desde fuera y no ensuciamos el scoope global
+})()

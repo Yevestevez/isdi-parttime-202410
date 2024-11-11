@@ -6,16 +6,41 @@ class App extends Component {
         title.setText('Hola, App!')
         this.add(title)
 
-        // const loginView = new LoginView
-        // this.add(loginView)
+        // landing
+        const landing = new Landing
+        this.add(landing)
 
-        // const landingView = new LandingView
-        // this.add(loginView)
+        landing.onRegisterClick(() => {
+            this.remove(landing)
+            this.add(register)
+        })
 
-        // const registerView = new RegisterView
-        // this.add(registerView)
+        landing.onLoginClick(() => {
+            this.remove(landing)
+            this.add(login)
+        })
 
-        const homeView = new HomeView
-        this.add(homeView)
+        // login
+        const login = new Login
+        login.onRegisterClick(() => {
+            this.remove(login)
+            this.add(register)
+        })
+
+        login.onLoginSubmit(() => {
+            this.remove(login)
+            this.add(home)
+        })
+
+        // register
+        const register = new Register
+        register.onLoginClick(() => {
+            this.remove(register)
+            this.add(login)
+        })
+
+        //home
+        const home = new Home
+
     }
 }

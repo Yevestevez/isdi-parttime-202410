@@ -1,99 +1,106 @@
-var loginView = document.createElement('main')
+class Login extends Component {
+    constructor() {
+        super(document.createElement('main'))
 
-var loginTitle = document.createElement('h2')
-loginTitle.innerText = 'login'
-loginView.appendChild(loginTitle)
+        const title = new Heading(2)
+        title.setText('Login')
+        this.add(title)
 
-// loginForm
-var loginForm = document.createElement('form')
-loginView.appendChild(loginForm)
+        // form
+        const form = new Form
+        this.add(form)
 
-// username
-var loginFormUsernameLabel = document.createElement('label')
-loginFormUsernameLabel.innerText = 'Username'
-loginFormUsernameLabel.htmlFor = 'username'
-loginForm.appendChild(loginFormUsernameLabel)
+        // username
+        const usernameLabel = new Label('username')
+        usernameLabel.setText('Username')
+        form.add(usernameLabel)
 
-var loginFormUsernameInput = document.createElement('input')
-loginFormUsernameInput.type = 'text'
-loginFormUsernameInput.id = 'username'
-loginForm.appendChild(loginFormUsernameInput)
+        const usernameInput = new Input('text', 'username')
+        form.add(usernameInput)
 
-// password
-var loginFormPasswordLabel = document.createElement('label')
-loginFormPasswordLabel.innerText = 'Password'
-loginFormPasswordLabel.htmlFor = 'password'
-loginForm.appendChild(loginFormPasswordLabel)
+        // password
+        const passwordLabel = new Label('password')
+        passwordLabel.setText('Password')
+        form.add(passwordLabel)
 
-var loginFormPasswordInput = document.createElement('input')
-loginFormPasswordInput.type = 'password'
-loginFormPasswordInput.id = 'password'
-loginForm.appendChild(loginFormPasswordInput)
+        const passwordInput = new Input('password', 'password')
+        form.add(passwordInput)
 
-// submit button
-var loginFormSubmitButton = document.createElement('button')
-loginFormSubmitButton.type = 'submit'
-loginFormSubmitButton.innerText = 'Login'
-loginForm.appendChild(loginFormSubmitButton)
+        // submit button
+        const submitButton = new Button('submit')
+        submitButton.setText('Login')
+        form.add(submitButton)
 
-loginForm.onsubmit = function (event) {
-    event.preventDefault()
+        // registerLink
+        const registerLink = new Link
+        registerLink.setText('Register')
+        this.add(registerLink)
+    }
 
-    var username = loginFormUsernameInput.value
-    var password = loginFormPasswordInput.value
+    onRegisterClick(callback) {
+        const registerLink = this.children[2]
 
-    try {
-        logic.loginUser(username, password)
+        registerLink.addBehavior('click', event => {
+            event.preventDefault()
 
-        loginForm.reset()
-
-        var name = logic.getUserName()
-
-        homeUser.innerText = 'Hello, ' + name + '!'
-
-        var posts = logic.getPosts()
-
-        homePosts.innerHTML = '' // Limpia la página para evitar duplicados de posts
-
-        posts.forEach(function (post) {
-            var homePost = document.createElement('article')
-            homePosts.appendChild(homePost)
-
-            var postAuthor = document.createElement('h3')
-            postAuthor.innerText = post.author
-            homePost.appendChild(postAuthor)
-
-            var postImage = document.createElement('img')
-            postImage.src = post.image
-            homePost.appendChild(postImage)
-
-            var postCaption = document.createElement('p')
-            postCaption.innerText = post.text
-            homePost.appendChild(postCaption)
-
-            var postDate = document.createElement('time')
-            postDate.innerText = post.date
-            homePost.appendChild(postDate)
+            callback()
         })
+    }
 
-        body.removeChild(loginView)
-        body.appendChild(homeView)
-    } catch (error) {
-        alert(error.message)
+    //Consigo entrar a loginUser y devuelve type error, entiendo que no recibe el input de username/password ni cambia a home, ya que no tengo programada la parte de click del botón, solo la acción de submit del formulario ¿sería el click del button y dentro el 'onLoginSubmit'?
+    onLoginSubmit(callback) {
+        const form = this.children[1]
 
-        console.error(error)
+        form.addBehavior('submit', event => {
+            event.preventDefault()
+
+            const username = form.children[1].value
+            const password = form.children[3].value
+
+            try {
+                logic.loginUser(username, password)
+
+                form.reset()
+
+                const name = logic.getUserName()
+
+                homeUser.innerText = 'Hello, ' + name + '!'
+
+                // const posts = logic.getPosts()
+
+                // homePosts.innerHTML = '' // Limpia la página para evitar duplicados de posts
+
+                // posts.forEach(function (post) {
+                //     const homePost = document.createElement('article')
+                //     homePosts.appendChild(homePost)
+
+                //     const postAuthor = document.createElement('h3')
+                //     postAuthor.innerText = post.author
+                //     homePost.appendChild(postAuthor)
+
+                //     const postImage = document.createElement('img')
+                //     postImage.src = post.image
+                //     homePost.appendChild(postImage)
+
+                //     const postCaption = document.createElement('p')
+                //     postCaption.innerText = post.text
+                //     homePost.appendChild(postCaption)
+
+                //     const postDate = document.createElement('time')
+                //     postDate.innerText = post.date
+                //     homePost.appendChild(postDate)
+                //})
+
+                callback()
+                // body.removeChild(loginView)
+                // body.appendChild(homeView)
+            } catch (error) {
+                alert(error.message)
+
+                console.error(error)
+            }
+
+
+        })
     }
 }
-
-// link --> register
-var loginRegisterLink = document.createElement('a')
-loginRegisterLink.href = ''
-loginRegisterLink.innerText = 'Register'
-
-loginRegisterLink.onclick = function (event) {
-    event.preventDefault()
-
-    body.removeChild(loginView)
-    body.appendChild(registerView)
-}
-loginView.appendChild(loginRegisterLink)
