@@ -8,6 +8,7 @@ class App extends Component {
 
         // landing
         const landing = new Landing
+
         this.add(landing)
 
         landing.onRegisterClick(() => {
@@ -22,19 +23,36 @@ class App extends Component {
 
         // login
         const login = new Login
+
         login.onRegisterClick(() => {
             this.remove(login)
             this.add(register)
         })
 
-        login.onLoginSubmit(() => {
-            this.remove(login)
-            this.add(home)
+        login.onLoggedIn(() => {
+            try {
+                const name = logic.getUserName()
+
+                home.setUserName(name)
+
+                this.remove(login)
+                this.add(home)
+            } catch (error) {
+                alert(error.message)
+
+                console.error(error)
+            }
         })
 
         // register
         const register = new Register
+
         register.onLoginClick(() => {
+            this.remove(register)
+            this.add(login)
+        })
+
+        register.onRegistered(() => {
             this.remove(register)
             this.add(login)
         })
@@ -42,5 +60,9 @@ class App extends Component {
         //home
         const home = new Home
 
+        home.onLoggedOut(() => {
+            this.remove(home)
+            this.add(login)
+        })
     }
 }

@@ -47,24 +47,22 @@ class Login extends Component {
         })
     }
 
-    //Consigo entrar a loginUser y devuelve type error, entiendo que no recibe el input de username/password ni cambia a home, ya que no tengo programada la parte de click del botón, solo la acción de submit del formulario ¿sería el click del button y dentro el 'onLoginSubmit'?
-    onLoginSubmit(callback) {
+    onLoggedIn(callback) {
         const form = this.children[1]
 
         form.addBehavior('submit', event => {
             event.preventDefault()
 
-            const username = form.children[1].value
-            const password = form.children[3].value
+            const usernameInput = form.children[1]
+            const passwordInput = form.children[3]
+
+            const username = usernameInput.getValue()
+            const password = passwordInput.getValue()
 
             try {
                 logic.loginUser(username, password)
 
-                form.reset()
-
-                const name = logic.getUserName()
-
-                homeUser.innerText = 'Hello, ' + name + '!'
+                form.clear()
 
                 // const posts = logic.getPosts()
 
@@ -92,15 +90,11 @@ class Login extends Component {
                 //})
 
                 callback()
-                // body.removeChild(loginView)
-                // body.appendChild(homeView)
             } catch (error) {
                 alert(error.message)
 
                 console.error(error)
             }
-
-
         })
     }
 }

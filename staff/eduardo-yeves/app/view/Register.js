@@ -44,7 +44,7 @@ class Register extends Component {
 
         // submitButton
         const submitButton = new Button('submit')
-        submitButton.setText('Login')
+        submitButton.setText('Register')
         form.add(submitButton)
 
         // loginLink
@@ -60,6 +60,37 @@ class Register extends Component {
             event.preventDefault()
 
             callback()
+        })
+    }
+
+    onRegistered(callback) {
+        const form = this.children[1]
+
+        form.addBehavior('submit', event => {
+            event.preventDefault()
+
+            const nameInput = form.children[1]
+            const emailInput = form.children[3]
+            const usernameInput = form.children[5]
+            const passwordInput = form.children[7]
+
+            const name = nameInput.getValue()
+            const email = emailInput.getValue()
+            const username = usernameInput.getValue()
+            const password = passwordInput.getValue()
+
+            try {
+                logic.registerUser(name, email, username, password)
+
+                form.clear()
+
+                callback()
+            } catch (error) {
+                alert(error.message)
+
+                console.error(error)
+            }
+
         })
     }
 }
