@@ -4,7 +4,7 @@ class Dorraymon {
     }
 
     indexOf(value) {
-        for (const i = 0; i < this.length; i++) {
+        for (let i = 0; i < this.length; i++) {
             if (this[i] === value) {
                 return i
             }
@@ -14,8 +14,8 @@ class Dorraymon {
 
     //Necesitamos el método .push de Dorraymon para uno de los casos de prueba de .indexOf
     push() {
-        for (const i = 0; i < arguments.length; i++) {
-            const argument = arguments[i]
+        for (let i = 0; i < arguments.length; i++) {
+            let argument = arguments[i]
             this[this.length] = argument
             this.length++
         }
