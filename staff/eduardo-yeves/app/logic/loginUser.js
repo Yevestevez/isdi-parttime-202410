@@ -6,9 +6,9 @@
         if (typeof password !== 'string') throw new Error('invalid password type')
         if (password.length < 8) throw new Error('invalid password length')
 
-        var users = JSON.parse(localStorage.users)
+        const users = JSON.parse(localStorage.users)
 
-        var user = users.find(function (user) {
+        const user = users.find(function (user) {
             return user.username === username && user.password === password
         })
 

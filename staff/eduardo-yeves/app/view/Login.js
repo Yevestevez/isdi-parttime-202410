@@ -64,31 +64,6 @@ class Login extends Component {
 
                 form.clear()
 
-                // const posts = logic.getPosts()
-
-                // homePosts.innerHTML = '' // Limpia la página para evitar duplicados de posts
-
-                // posts.forEach(function (post) {
-                //     const homePost = document.createElement('article')
-                //     homePosts.appendChild(homePost)
-
-                //     const postAuthor = document.createElement('h3')
-                //     postAuthor.innerText = post.author
-                //     homePost.appendChild(postAuthor)
-
-                //     const postImage = document.createElement('img')
-                //     postImage.src = post.image
-                //     homePost.appendChild(postImage)
-
-                //     const postCaption = document.createElement('p')
-                //     postCaption.innerText = post.text
-                //     homePost.appendChild(postCaption)
-
-                //     const postDate = document.createElement('time')
-                //     postDate.innerText = post.date
-                //     homePost.appendChild(postDate)
-                //})
-
                 callback()
             } catch (error) {
                 alert(error.message)

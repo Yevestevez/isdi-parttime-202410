@@ -3,9 +3,9 @@
         if (typeof image !== 'string') throw Error('invalid image type')
         if (typeof text !== 'string') throw Error('invalid text type')
 
-        var posts = JSON.parse(localStorage.posts)
+        const posts = JSON.parse(localStorage.posts)
 
-        var post = {
+        const post = {
             id: uuid(),
             author: sessionStorage.userId,
             image: image,

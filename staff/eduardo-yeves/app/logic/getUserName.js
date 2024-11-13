@@ -1,8 +1,8 @@
 (function () {
     function getUserName() {
-        var users = JSON.parse(localStorage.users)
+        const users = JSON.parse(localStorage.users)
 
-        var user = users.find(function (user) {
+        const user = users.find(function (user) {
             return user.id === sessionStorage.userId
         })
 
