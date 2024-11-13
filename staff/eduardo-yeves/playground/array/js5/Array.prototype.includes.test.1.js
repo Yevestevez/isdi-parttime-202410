@@ -2,7 +2,7 @@ console.log('TEST Array.prototype.includes')
 
 console.log('CASE find out if a superhero belongs to the avengers')
 
-const theAvengers = [
+var theAvengers = [
     'Iron Man',
     'Captain America',
     'Hulk',
