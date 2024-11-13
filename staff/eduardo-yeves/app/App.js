@@ -32,8 +32,10 @@ class App extends Component {
         login.onLoggedIn(() => {
             try {
                 const name = logic.getUserName()
-
                 home.setUserName(name)
+
+                const posts = logic.getPosts()
+                home.setPosts(posts)
 
                 this.remove(login)
                 this.add(home)
