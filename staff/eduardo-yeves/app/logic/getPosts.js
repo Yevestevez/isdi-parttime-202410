@@ -1,25 +1,21 @@
-(function () {
-    function getPosts() {
-        const users = JSON.parse(localStorage.users)
-        const posts = JSON.parse(localStorage.posts)
+logic.getPosts = () => {
+    const users = JSON.parse(localStorage.users)
+    const posts = JSON.parse(localStorage.posts)
 
-        posts.forEach(function (post) {
-            const authorId = post.author
+    posts.forEach(post => {
+        const authorId = post.author
 
-            const user = users.find(function (user) {
-                return user.id === authorId
-            })
+        const user = users.find(user => user.id === authorId)
 
-            const username = user.username
+        const username = user.username
 
-            post.author = {
-                id: authorId,
-                username: username
-            }
-        })
+        post.author = {
+            id: authorId,
+            username: username
+        }
 
-        return posts.reverse()
-    }
+        post.own = authorId === sessionStorage.userId
+    })
 
-    logic.getPosts = getPosts
-})()
+    return posts.reverse()
+}

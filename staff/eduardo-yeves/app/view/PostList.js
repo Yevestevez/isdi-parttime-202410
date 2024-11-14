@@ -8,6 +8,20 @@ class PostList extends Component {
 
         posts.forEach(post => {
             const postItem = new PostItem(post)
+
+            if (post.own)
+                postItem.onDeleted(() => {
+                    try {
+                        const posts = logic.getPosts()
+
+                        this.setPosts(posts)
+                    } catch (error) {
+                        alert(error.message)
+
+                        console.error(error)
+                    }
+                })
+
             this.add(postItem)
         })
     }

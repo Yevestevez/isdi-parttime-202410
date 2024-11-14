@@ -9,7 +9,8 @@ class App extends Component {
         // landing
         const landing = new Landing
 
-        this.add(landing)
+        if (!logic.isUserLoggedIn())
+            this.add(landing)
 
         landing.onRegisterClick(() => {
             this.remove(landing)
@@ -61,6 +62,22 @@ class App extends Component {
 
         //home
         const home = new Home
+
+        if (logic.isUserLoggedIn()) {
+            try {
+                const name = logic.getUserName()
+                home.setUserName(name)
+
+                const posts = logic.getPosts()
+                home.setPosts(posts)
+
+                this.add(home)
+            } catch (error) {
+                alert(error.message)
+
+                console.error(error)
+            }
+        }
 
         home.onLoggedOut(() => {
             this.remove(home)
