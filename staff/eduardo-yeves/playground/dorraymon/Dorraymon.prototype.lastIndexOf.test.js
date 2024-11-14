@@ -39,3 +39,22 @@ console.log('CASE know places of The Middle Earth')
     console.log(isInMiddleEarth('Gotham'))
     // Wrong world! Gotham doesn't belong to Middle-Earth. Try again
 }
+
+
+console.log('CASE return element last index of elements')
+
+{
+    const elements = new Dorraymon
+    elements[0] = 'Water'
+    elements[1] = 'Earth'
+    elements[2] = 'Air'
+    elements[3] = 'Fire'
+    elements[4] = 'Water'
+    elements[5] = 'Earth'
+    elements[6] = 'Air'
+    elements[7] = 'Fire'
+    elements.length = 8
+
+    console.log(elements.lastIndexOf('Water'))
+    // 4
+}
