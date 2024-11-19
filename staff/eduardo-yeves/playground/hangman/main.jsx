@@ -8,7 +8,8 @@ class App extends Component {
 
         this.state = {
             feedback: null,
-            assertions: []
+            assertions: [],
+            fails: 0
         }
     }
 
@@ -25,17 +26,30 @@ class App extends Component {
                 form.reset()
 
                 const word = this.props.guess
-                const index = word.indexOf(char)
 
-                if (index < 0)
-                    this.setState({ feedback: 'failed' })
-                else {
-                    const assertions = this.state.assertions.concat()
+                const assertions = this.state.assertions.concat()
 
-                    assertions[index] = char
+                word.split('').forEach((wordChar, index) => {
+                    if (wordChar === char)
+                        assertions[index] = char
+                })
 
-                    this.setState({ feedback: 'asserted', assertions })
-                }
+                const assertionsBeforeCount = this.state.assertions.reduce((accum, char) => {
+                    if (char) return accum + 1
+
+                    return accum
+                }, 0)
+
+                const assertionsAfterCount = assertions.reduce((accum, char) => {
+                    if (char) return accum + 1
+
+                    return accum
+                }, 0)
+
+                if (assertionsBeforeCount === assertionsAfterCount) {
+                    this.setState({ feedback: this.state.fails === 5 ? 'lost' : 'failed', fails: this.state.fails + 1 })
+                } else
+                    this.setState({ feedback: assertionsAfterCount === word.length ? 'won' : 'asserted', assertions })
             }
             }>
                 <label htmlFor="char">Char</label>
@@ -44,10 +58,10 @@ class App extends Component {
             </form>
 
 
-            <p>{this.props.player}:{this.state.feedback}</p>
+            <p>{this.props.player}:{this.state.feedback} (fails: {this.state.fails})</p>
             <p>assertions: {this.state.assertions.join('')}</p>
         </main>
     }
 }
 
-root.render(<App player="Edu" guess={'murcielago'} />)
+root.render(<App player="Edu" guess={'camarero'} />)
