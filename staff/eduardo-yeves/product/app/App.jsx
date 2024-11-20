@@ -2,6 +2,8 @@ const Component = React.Component
 
 class App extends Component {
     constructor(props) {
+        console.log('App -> constructor')
+
         super(props)
 
         this.state = { view: 'landing' }
@@ -9,6 +11,8 @@ class App extends Component {
 
 
     render() {
+        console.log('App -> render')
+
         return <>
             <h1>Hola App!</h1>
 

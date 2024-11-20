@@ -1,4 +1,3 @@
-
 logic.loginUser = (username, password) => {
     validate.username(username)
     validate.password(password)

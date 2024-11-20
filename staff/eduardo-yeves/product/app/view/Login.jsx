@@ -2,10 +2,14 @@ const Component = React.Component
 
 class Login extends Component {
     constructor(props) {
+        console.log('Login -> constructor')
+
         super(props)
     }
 
     render() {
+        console.log('Login -> render')
+
         return <main>
             <h2>Login</h2>
             <form onSubmit={event => {
@@ -25,14 +29,14 @@ class Login extends Component {
                 } catch (error) {
                     alert(error.message)
 
-                    console.log(error)
+                    console.error(error)
                 }
             }}>
                 <label htmlFor="username">Username</label>
                 <input type="text" id="username" />
 
                 <label htmlFor="password">Password</label>
-                <input type="text" id="password" />
+                <input type="password" id="password" />
 
                 <button type="submit">Login</button>
             </form>

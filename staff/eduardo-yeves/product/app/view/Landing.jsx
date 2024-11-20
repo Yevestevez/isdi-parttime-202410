@@ -2,10 +2,14 @@ const Component = React.Component
 
 class Landing extends Component {
     constructor(props) {
+        console.log('Landing -> constructor')
+
         super(props)
     }
 
     render() {
+        console.log('Landing -> render')
+
         return <main>
             <h2>Welcome!</h2>
 

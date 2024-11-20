@@ -2,10 +2,14 @@ const Component = React.Component
 
 class Register extends Component {
     constructor(props) {
+        console.log('Register -> constructor')
+
         super(props)
     }
 
     render() {
+        console.log('Register-> render')
+
         return <main>
             <h2>Register</h2>
 
@@ -28,7 +32,7 @@ class Register extends Component {
                 } catch (error) {
                     alert(error.message)
 
-                    console.log(error)
+                    console.error(error)
                 }
             }}>
 
@@ -36,13 +40,13 @@ class Register extends Component {
                 <input type="text" id="name" />
 
                 <label htmlFor="email">Email</label>
-                <input type="text" id="email" />
+                <input type="email" id="email" />
 
                 <label htmlFor="username">Username</label>
                 <input type="text" id="username" />
 
                 <label htmlFor="password">Password</label>
-                <input type="text" id="password" />
+                <input type="password" id="password" />
 
                 <button type="submit">Register</button>
             </form>
