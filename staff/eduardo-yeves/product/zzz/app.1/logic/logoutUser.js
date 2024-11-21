@@ -1,0 +1,1 @@
+logic.logoutUser = () => { return delete sessionStorage.userId }

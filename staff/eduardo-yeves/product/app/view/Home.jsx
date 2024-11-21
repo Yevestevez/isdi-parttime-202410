@@ -6,7 +6,7 @@ class Home extends Component {
 
         super(props)
 
-        this.state = { greeting: '', posts: [] }
+        this.state = { name: null, posts: [] }
     }
 
     componentDidMount() {
@@ -15,9 +15,8 @@ class Home extends Component {
         try {
             const name = logic.getUserName()
             const posts = logic.getPosts()
-            //postList.setPosts(posts)
 
-            this.setState({ greeting: `Hello, ${name}!`, posts })
+            this.setState({ name, posts })
         } catch (error) {
             alert(error.message)
 
@@ -31,7 +30,7 @@ class Home extends Component {
         return <main>
             <h2>Home</h2>
 
-            <h3>{this.state.greeting}</h3>
+            <h3>Hello, {this.state.name}!</h3>
 
             <button type="button" onClick={() => {
                 try {
@@ -47,7 +46,34 @@ class Home extends Component {
 
             <button type="button">+</button>
 
-            <PostList posts={this.state.posts} />
+            <section>
+                {this.state.posts.map(post =>
+                    <article>
+                        <h3>{post.author.username}</h3>
+
+                        <img src={post.image} />
+
+                        <p>{post.text}</p>
+
+                        <time>{post.date}</time>
+
+                        {post.own && <button type="button" onClick={() => {
+                            if (confirm('Delete post?'))
+                                try {
+                                    logic.deletePost(post.id)
+
+                                    const posts = logic.getPost()
+
+                                    this.setState({ posts })
+                                } catch (error) {
+                                    alert(error.message)
+
+                                    console.error(error)
+                                }
+                        }}>🗑️</button>}
+                    </article>
+                )}
+            </section>
         </main>
     }
 }
