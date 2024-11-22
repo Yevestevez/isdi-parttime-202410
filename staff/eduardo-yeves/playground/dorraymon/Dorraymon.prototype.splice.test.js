@@ -3,19 +3,45 @@ class Dorraymon {
         this.length = 0
     }
 
-    // splice(start, deleteCount, item, item2) {
+    // splice(start, deleteCount, item) {
     //     const itemToMove = this[start]
     //     this[start] = item
     //     this[start + 1] = itemToMove
     //     this.length += 1
     // }
 
-    splice(start, deleteCount, item, item2) {
+    splice(start, deleteCount, ...items) {
+        let itemsToMove = {}
+        for (let i = start; i < start + items.length; i++) {
+            itemsToMove[i] = this[i]
+            //seguir >>>>
+        }
 
+        return itemsToMove
     }
 }
 
 console.log('TEST Dorraymon prototype splice')
+
+console.log('CASE add abril and mayo in months')
+
+{
+    const months = new Dorraymon
+    months[0] = 'enero'
+    months[1] = 'febrero'
+    months[2] = 'marzo'
+    months[3] = 'junio'
+    months[4] = 'julio'
+    months.length = 5
+
+    console.log(months)
+    // Dorraymon {'enero', 'febrero', 'marzo', 'junio', 'julio', length: 5}
+
+    months.splice(3, 0, 'abril', 'mayo')
+    console.log(months)
+    // Dorraymon {'enero', 'febrero', 'marzo', 'abril, 'mayo', 'junio', 'julio', length: 7}
+}
+
 
 console.log('CASE add summer in seasons')
 
@@ -33,21 +59,3 @@ console.log('CASE add summer in seasons')
     console.log(seasons)
     // Dorraymon {'winter, 'spring', 'summer', 'autumn', length: 4}
 }
-
-
-console.log('CASE add spring and summer in seasons')
-
-{
-    const seasons = new Dorraymon
-    seasons[0] = 'winter'
-    seasons[1] = 'autumn'
-    seasons.length = 2
-
-    console.log(seasons)
-    // Dorraymon {'winter,'autumn', length: 2}
-
-    seasons.splice(2, 0, 'spring', 'summer')
-    console.log(seasons)
-    // Dorraymon {'winter, 'spring', 'summer', 'autumn', length: 4}
-}
-
