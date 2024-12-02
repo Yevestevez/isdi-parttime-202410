@@ -1,7 +1,5 @@
 const validate = require('./helpers/validate')
-
 const localStorage = require('../data/localStorage')
-
 const uuid = require('../data/uuid')
 
 const registerUser = (name, email, username, password) => {
