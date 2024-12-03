@@ -1,5 +1,6 @@
 const fs = require('fs')
 
+
 const localStorage = {
     get users() { // ejemplo de uso: const users = JSON.parse(localStorage.users)
         const users = fs.readFileSync('./data/users.json', 'utf8') // lectura de archivo (ruta, formato)
