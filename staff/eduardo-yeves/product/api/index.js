@@ -8,7 +8,7 @@ const PORT = 8080; // Especificamos el puerto en el que arrancaremos el servidor
 
 const api = express(); // Creamos una instancia de express
 
-const jsonBodyParser = express.json(); // Importamos el jsonBodyParser desde express.json; sirve para traducir el cuerpo de una solicitud entrante, por ejemplo, el input de un formulario, a un objeto JavaScrip accesible a través de req.body
+const jsonBodyParser = express.json(); // Importamos el jsonBodyParser desde express.json; sirve para traducir el cuerpo de una solicitud entrante a un objeto JavaScript accesible a través de req.body
 
 // Creamos una ruta de prueba que simplemente responde (res.send) con 'Hello, API!'
 api.get('/helloworld', (req, res) => res.send('Hello API!'));
@@ -16,6 +16,7 @@ api.get('/helloworld', (req, res) => res.send('Hello API!'));
 // Creamos una ruta .post para crear un usuario
 api.post('/users', jsonBodyParser, (req, res) => { // Usamos el middleware jsonBodyParser para traducir de JSON a JS
     try {
+        // req.body es una propiedad del objeto de solicitud (req) que contiene los datos enviados por el cliente (generalmente un navegador o una aplicación) en el cuerpo de la solicitud HTTP.
         const { name, email, username, password } = req.body; // Mediante desestructuración, recojo los datos del imput (req.body) en las variables correspondientes -> const name = req.body.name; const email = req.body.email; (etc...)
 
         logic.registerUser(name, email, username, password); // Indicamos que use la lógica (registerUser.js)
@@ -23,6 +24,33 @@ api.post('/users', jsonBodyParser, (req, res) => { // Usamos el middleware jsonB
         res.status(201).send(); // Responde con un status 201, avisando de que se ha creado algo en el servidor
     } catch (error) {
         res.status(400).json({ error: error.constructor.name, message: error.message }); // Indicamos un error (en json) status 400 por si no funciona la lógica
+    }
+})
+
+// Creamos una ruta .post para autentificar un usuario
+api.post('/users/auth', jsonBodyParser, (req, res) => { // Usamos el middleware jsonBodyParser para traducir de JSON a JS
+    try {
+        const { username, password } = req.body;
+
+        const userId = logic.authenticateUser(username, password);
+
+        res.json(userId);
+    } catch (error) {
+        res.status(400).json({ error: error.constructor.name, message: error.message });
+    }
+})
+
+//Creamos una ruta para getUserName
+
+api.get('/users/:userId', (req, res) => {
+    try {
+        const { userId } = req.params
+
+        const name = logic.getUserName(userId)
+
+        res.json(name)
+    } catch (error) {
+        res.status(400).json({ error: error.constructor.name, message: error.message })
     }
 })
 

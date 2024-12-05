@@ -19,5 +19,19 @@
         "email": "pepito@grillo.com",
         "username": "pepitogrillo",
         "password": "123123123"
+    },
+    {
+        "id": "m4a9mrbzj",
+        "name": "Le Chuga",
+        "email": "le@chuga.com",
+        "username": "lechuga",
+        "password": "123123123"
+    },
+    {
+        "id": "m4abhmhvrm",
+        "name": "Zana Horia",
+        "email": "zana@horia.com",
+        "username": "zanahoria",
+        "password": "123123123"
     }
 ]
