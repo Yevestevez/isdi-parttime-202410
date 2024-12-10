@@ -13,6 +13,18 @@ const db = { // creamos el objeto db
 
     set users(users) { // Podemos llamar al setter usando, por ejemplo: db.users = JSON.stringify(users)
         fs.writeFileSync('./data/users.json', JSON.stringify(users)); // Cuando accedemos a db.users, estaremos escribiendo en nuestro archivo users.json, previamente traducido a JSON con el método stringify -> fs.writeFileSync('ruta del archivo', elemento a escribir)
+    },
+
+    get posts() {
+        const posts = fs.readFileSync('./data/posts.json', 'utf8');
+
+        return JSON.parse(posts);
+    },
+
+    set posts(posts) {
+        fs.writeFileSync('.data/posts.json', JSON.stringify(posts));
+
+        return JSON.parse(posts);
     }
 }
 

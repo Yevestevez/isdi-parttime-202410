@@ -8,7 +8,7 @@ const PORT = 8080; // Especificamos el puerto en el que arrancaremos el servidor
 
 const api = express(); // Creamos una instancia de express
 
-const jsonBodyParser = express.json(); // Importamos el jsonBodyParser desde express.json; sirve para traducir el cuerpo de una solicitud entrante a un objeto JavaScript accesible a través de req.body
+const jsonBodyParser = express.json(); // Declaramos el jsonBodyParser desde express.json; sirve para traducir el cuerpo de una solicitud entrante a un objeto JavaScript accesible a través de req.body
 
 // Creamos una ruta de prueba que simplemente responde (res.send) con 'Hello, API!'
 api.get('/helloworld', (req, res) => res.send('Hello API!'));
@@ -40,17 +40,82 @@ api.post('/users/auth', jsonBodyParser, (req, res) => { // Usamos el middleware 
     }
 })
 
-//Creamos una ruta para getUserName
+// Creamos una ruta para getUserName
+// api.get('/users/:userId', (req, res) => {
+//     try {
+//         const { userId } = req.params;
 
-api.get('/users/:userId', (req, res) => {
+//         const name = logic.getUserName(userId);
+
+//         res.json(name);
+//     } catch (error) {
+//         res.status(400).json({ error: error.constructor.name, message: error.message });
+//     }
+// })
+
+api.get('/users', (req, res) => {
     try {
-        const { userId } = req.params
+        const userId = req.headers.authorization.slice(6); // ejemplo: Basic abc123
+        const name = logic.getUserName(userId);
 
-        const name = logic.getUserName(userId)
-
-        res.json(name)
+        res.json(name);
     } catch (error) {
-        res.status(400).json({ error: error.constructor.name, message: error.message })
+        res.status(400).json({ error: error.constructor.name, message: error.message });
+    }
+})
+
+// Creamos una ruta para getPosts
+// api.get('/posts/:userId', (req, res) => {
+//     try {
+//         const { userId } = req.params;
+
+//         const posts = logic.getPosts(userId);
+
+//         res.json(posts);
+//     } catch (error) {
+//         res.status(400).json({ error: error.constructor.name, message: error.message });
+//     }
+// })
+
+api.get('/posts', (req, res) => {
+    try {
+        const userId = req.headers.authorization.slice(6); // ejemplo: Basic abc123
+
+        const posts = logic.getPosts(userId);
+
+        res.json(posts);
+    } catch (error) {
+        res.status(400).json({ error: error.constructor.name, message: error.message });
+    }
+
+})
+
+// createPost
+api.post('/posts', jsonBodyParser, (req, res) => {
+    try {
+        const userId = req.headers.authorization.slice(6);
+
+        const { image, text } = req.body;
+
+        logic.createPost(userId, image, text);
+
+        res.status(201).send();
+    } catch (error) {
+        res.status(400).json({ error: error.constructor.name, message: error.message });
+    }
+})
+
+api.delete('/posts/:postId', jsonBodyParser, (req, res) => {
+    try {
+        const userId = req.headers.authorization.slice(6); // Basic abc123
+
+        const { postId } = req.params;
+
+        logic.deletePost(userId, postId);
+
+        res.status(204).send();
+    } catch (error) {
+        res.status(400).json({ error: error.constructor.name, message: error.message });
     }
 })
 

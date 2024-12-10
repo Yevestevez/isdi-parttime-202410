@@ -1,9 +1,9 @@
-import getUserName from './getUserName.js'
+import getUserName from './getUserName.js';
 
 try {
-    const name = getUserName('m4abhmhvrm')
+    const name = getUserName('m4abhmhvrm');
 
-    console.log(name)
+    console.log(name);
 } catch (error) {
-    console.error(error)
+    console.error(error);
 }
