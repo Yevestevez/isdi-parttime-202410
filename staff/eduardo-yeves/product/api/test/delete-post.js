@@ -1,14 +1,12 @@
-fetch('http://localhost:8080/users', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: '{"name":"Pe pino","email":"pe@pino.com","username":"pepino","password":"123123123"}'
+fetch('http://localhost/posts', {
+    method: 'DELETE',
+    headers: { Authorization: 'Basic m2w92r8h09' }
 })
+
     .then(res => {
         const { status } = res;
 
-        if (status === 201) {
+        if (status === 204) {
             console.log('OK', status);
 
             return;

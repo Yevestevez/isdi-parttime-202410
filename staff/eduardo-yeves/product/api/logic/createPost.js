@@ -1,6 +1,6 @@
 import validate from './helper/validate.js';
 import db from '../data/db.js';
-import uuid from '../data.uuid.js';
+import uuid from '../data/uuid.js';
 
 const createPost = (userId, image, text) => {
     validate.id(userId, 'userId');

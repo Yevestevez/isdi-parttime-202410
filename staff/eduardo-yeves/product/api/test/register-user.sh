@@ -5,7 +5,7 @@
 # http://localhost:8080/users -> indica la ruta a la que llamamos desde cURL
 # -v -> Verbose (modo detallado): indica que queremos que nos muestre información detallada de lo que sucede durante la ejecución del comando
 
-curl -X POST -H 'Content-Type: application/json' -d '{"name":"Zana Horia","email":"zana@horia.com","username":"zanahoria","password":"123123123"}' http://localhost:8080/users -v
+curl -X POST -H 'Content-Type: application/json' -d '{"name":"To Mate","email":"to@mate.com","username":"tomate","password":"123123123"}' http://localhost:8080/users -v
 
 # Para testear, primero arrancamos el servidor en una terminal (npm start || node index.js) y después usamos otra terminal en la que copiamos (Windows + C) y ejecutamos el código anterior
 

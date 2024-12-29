@@ -22,7 +22,7 @@ const db = { // creamos el objeto db
     },
 
     set posts(posts) {
-        fs.writeFileSync('.data/posts.json', JSON.stringify(posts));
+        fs.writeFileSync('./data/posts.json', JSON.stringify(posts));
 
         return JSON.parse(posts);
     }

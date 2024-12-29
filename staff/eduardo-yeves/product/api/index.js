@@ -2,6 +2,8 @@
 // En el ejemplo anterior (sin module) usábamos require -> const express = require('express')
 import express from 'express';
 
+import cors from 'cors'; // Importamos CORS (Cross-Origin Resource Sharing), previamente hemos descargado el paquete desde la consola con "npm i cors"
+
 import logic from './logic/index.js'; // Importamos nuestro archivo index.js con las lógicas
 
 const PORT = 8080; // Especificamos el puerto en el que arrancaremos el servidor, usamos mayúsculas ya que será un valor constante
@@ -10,8 +12,10 @@ const api = express(); // Creamos una instancia de express
 
 const jsonBodyParser = express.json(); // Declaramos el jsonBodyParser desde express.json; sirve para traducir el cuerpo de una solicitud entrante a un objeto JavaScript accesible a través de req.body
 
+api.use(cors()); // Inyectamos un middleware que introduce en las cabeceras de respuesta del server los datos necesarios para permitir compartir recursos desde distintos dominios
+
 // Creamos una ruta de prueba que simplemente responde (res.send) con 'Hello, API!'
-api.get('/helloworld', (req, res) => res.send('Hello API!'));
+api.get('/', (req, res) => res.send('Hello API!'));
 
 // Creamos una ruta .post para crear un usuario
 api.post('/users', jsonBodyParser, (req, res) => { // Usamos el middleware jsonBodyParser para traducir de JSON a JS
