@@ -35,7 +35,6 @@ class Register extends Component {
 
                             console.log(error)
                         })
-
                 } catch (error) {
                     alert(error.message)
 

@@ -69,18 +69,6 @@ api.get('/users', (req, res) => {
 })
 
 // Creamos una ruta para getPosts
-// api.get('/posts/:userId', (req, res) => {
-//     try {
-//         const { userId } = req.params;
-
-//         const posts = logic.getPosts(userId);
-
-//         res.json(posts);
-//     } catch (error) {
-//         res.status(400).json({ error: error.constructor.name, message: error.message });
-//     }
-// })
-
 api.get('/posts', (req, res) => {
     try {
         const userId = req.headers.authorization.slice(6); // ejemplo: Basic abc123
