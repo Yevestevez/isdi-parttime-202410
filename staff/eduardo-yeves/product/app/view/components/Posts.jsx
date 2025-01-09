@@ -1,20 +1,19 @@
-const Component = React.Component
+const { useState, useEffect } = React
 
-class Posts extends Component {
-    constructor(props) {
-        console.log('Posts -> constructor')
+function Posts() {
 
-        super(props)
+    const [posts, setPosts] = useState([])
 
-        this.state = { posts: [] }
-    }
+    useEffect(() => {
+        console.log('Posts -> "componentDidMount" (useEffect)')
 
-    componentDidMount() {
-        console.log('Posts -> componentDidMount')
+        loadPosts()
+    }, [])
 
+    const loadPosts = () => {
         try {
             logic.getPosts()
-                .then(posts => this.setState({ posts }))
+                .then(posts => setPosts(posts))
                 .catch(error => {
                     alert(error.message)
 
@@ -27,24 +26,11 @@ class Posts extends Component {
         }
     }
 
-    render() {
-        console.log('Posts -> render')
+    const handlePostDeleted = () => loadPosts()
 
-        return <section>
-            {this.state.posts.map(post =>
-                <Post key={post.id} post={post} onPostDeleted={() => {
-                    try {
-                        const posts = logic.getPosts()
+    console.log('Posts -> render')
 
-                        this.setState({ posts })
-
-                    } catch (error) {
-                        alert(error.message)
-
-                        console.error(error)
-                    }
-                }} />
-            )}
-        </section>
-    }
+    return <section>
+        {posts.map(post => <Post key={post.id} post={post} onPostDeleted={handlePostDeleted} />)}
+    </section>
 }
