@@ -1,1 +1,1 @@
-logic.logoutUser = () => { return delete sessionStorage.userId }
+const logoutUser = () => { delete sessionStorage.userId };

@@ -1,4 +1,6 @@
-logic.createPost = (image, text) => {
+import validate from './helper/validate';
+
+const createPost = (image, text) => {
     validate.image(image);
     validate.text(text);
 
@@ -12,15 +14,17 @@ logic.createPost = (image, text) => {
     })
         .catch(error => { throw new Error(error.message) })
         .then(res => {
-            const { status } = res
+            const { status } = res;
 
-            if (status === 201) return
+            if (status === 201) return;
 
             return res.json()
                 .then(body => {
-                    const { error, message } = body
+                    const { error, message } = body;
 
-                    throw new Error(message)
-                })
-        })
-}
+                    throw new Error(message);
+                });
+        });
+};
+
+export default createPost;

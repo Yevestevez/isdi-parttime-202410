@@ -1,40 +1,42 @@
+import logic from '../logic';
+
 function Register(props) {
-    console.log('Register-> render')
+    console.log('Register-> render');
 
     const handleFormSubmit = event => {
-        event.preventDefault()
+        event.preventDefault();
 
-        const form = event.target
+        const form = event.target;
 
-        const name = form.name.value
-        const email = form.email.value
-        const username = form.username.value
-        const password = form.password.value
+        const name = form.name.value;
+        const email = form.email.value;
+        const username = form.username.value;
+        const password = form.password.value;
 
         try {
             logic.registerUser(name, email, username, password)
                 .then(() => {
-                    form.reset()
+                    form.reset();
 
-                    props.onUserRegistered()
+                    props.onUserRegistered();
                 })
                 .catch(error => {
-                    alert(error.message)
+                    alert(error.message);
 
-                    console.error(error)
-                })
+                    console.error(error);
+                });
         } catch (error) {
-            alert(error.message)
+            alert(error.message);
 
-            console.error(error)
-        }
-    }
+            console.error(error);
+        };
+    };
 
     const handleLoginLinkClick = event => {
-        event.preventDefault()
+        event.preventDefault();
 
-        props.onLoginClicked()
-    }
+        props.onLoginClicked();
+    };
 
     return <main>
         <h2>Register</h2>
@@ -58,4 +60,6 @@ function Register(props) {
 
         <a href="" onClick={handleLoginLinkClick}>Login</a>
     </main>
-}
+};
+
+export default Register;

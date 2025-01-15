@@ -1,36 +1,40 @@
-const { useState, useEffect } = React
+import { useState, useEffect } from 'react';
+
+import logic from '../../logic';
+import Post from './Post';
 
 function Posts() {
-
-    const [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        console.log('Posts -> "componentDidMount" (useEffect)')
+        console.log('Posts -> "componentDidMount" (useEffect)');
 
-        loadPosts()
-    }, [])
+        loadPosts();
+    }, []);
 
     const loadPosts = () => {
         try {
             logic.getPosts()
                 .then(posts => setPosts(posts))
                 .catch(error => {
-                    alert(error.message)
+                    alert(error.message);
 
-                    console.error(error)
+                    console.error(error);
                 })
         } catch (error) {
-            alert(error.message)
+            alert(error.message);
 
-            console.error(error)
+            console.error(error);
         }
     }
 
-    const handlePostDeleted = () => loadPosts()
+    const handlePostDeleted = () => loadPosts();
 
-    console.log('Posts -> render')
+    console.log('Posts -> render');
 
     return <section>
         {posts.map(post => <Post key={post.id} post={post} onPostDeleted={handlePostDeleted} />)}
     </section>
-}
+};
+
+export default Posts;

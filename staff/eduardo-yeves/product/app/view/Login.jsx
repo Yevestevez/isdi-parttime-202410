@@ -1,37 +1,39 @@
+import logic from '../logic';
+
 function Login(props) {
-    console.log('Login -> render')
+    console.log('Login -> render');
 
     const handleFormSubmit = event => {
-        event.preventDefault()
+        event.preventDefault();
 
-        const form = event.target
+        const form = event.target;
 
-        const username = form.username.value
-        const password = form.password.value
+        const username = form.username.value;
+        const password = form.password.value;
 
         try {
             logic.loginUser(username, password)
                 .then(() => {
-                    form.reset()
+                    form.reset();
 
-                    props.onUserLoggedIn()
+                    props.onUserLoggedIn();
                 })
                 .catch(error => {
-                    alert(error.message)
+                    alert(error.message);
 
-                    console.error(error)
-                })
+                    console.error(error);
+                });
         } catch (error) {
             alert(error.message);
 
             console.error(error);
-        }
-    }
+        };
+    };
 
     const handleRegisterLinkClick = event => {
-        event.preventDefault()
+        event.preventDefault();
 
-        props.onRegisterClicked()
+        props.onRegisterClicked();
     }
 
     return <main>
@@ -48,4 +50,6 @@ function Login(props) {
 
         <a href="" onClick={handleRegisterLinkClick}>Register</a>
     </main>
-}
+};
+
+export default Login;

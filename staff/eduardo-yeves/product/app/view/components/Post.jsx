@@ -1,3 +1,5 @@
+import logic from '../../logic';
+
 function Post(props) {
     const handleDeleteButtonClick = () => {
         if (confirm('Delete post?'))
@@ -5,18 +7,18 @@ function Post(props) {
                 logic.deletePost(props.post.id)
                     .then(() => props.onPostDeleted())
                     .catch(error => {
-                        alert(error.message)
+                        alert(error.message);
 
-                        console.error(error)
+                        console.error(error);
                     })
             } catch (error) {
-                alert(error.message)
+                alert(error.message);
 
-                console.error(error)
+                console.error(error);
             }
     }
 
-    console.log('Post -> render')
+    console.log('Post -> render');
 
     return <article>
         <h3>{props.post.author.username}</h3>
@@ -29,4 +31,6 @@ function Post(props) {
 
         {props.post.own && <button type="button" onClick={handleDeleteButtonClick}>🗑️</button>}
     </article>
-}
+};
+
+export default Post;

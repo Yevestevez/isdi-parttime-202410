@@ -1,44 +1,48 @@
-const { useState, useEffect } = React
+import { useState, useEffect } from 'react';
+
+import logic from '../logic';
+import Posts from './components/Posts';
+import CreatePost from './components/CreatePost';
 
 function Home(props) {
-    const [view, setView] = useState('posts')
-    const [name, setName] = useState(null)
+    const [view, setView] = useState('posts');
+    const [name, setName] = useState(null);
 
     useEffect(() => {
-        console.log('Home -> "componentDidMount" (useEffect)')
+        console.log('Home -> "componentDidMount" (useEffect)');
 
         try {
             logic.getUserName()
                 .then(name => setName(name))
                 .catch(error => {
-                    alert(error.message)
+                    alert(error.message);
 
-                    console.error(error)
+                    console.error(error);
                 })
         } catch (error) {
-            alert(error.message)
+            alert(error.message);
 
-            console.error(error)
+            console.error(error);
         }
-    }, [])
+    }, []);
 
     const handleLogoutButtonClick = () => {
         try {
-            logic.logoutUser()
+            logic.logoutUser();
 
-            props.onUserLoggedOut()
+            props.onUserLoggedOut();
         } catch (error) {
-            alert(error.message)
+            alert(error.message);
 
-            console.error(error)
-        }
-    }
+            console.error(error);
+        };
+    };
 
-    const handlePostCreated = () => setView('posts')
+    const handlePostCreated = () => setView('posts');
 
-    const handleCreatePostButtonClick = () => setView('create-post')
+    const handleCreatePostButtonClick = () => setView('create-post');
 
-    console.log('Home -> render')
+    console.log('Home -> render');
 
     return <main>
         <h2>Home</h2>
@@ -52,4 +56,6 @@ function Home(props) {
         {view === 'posts' && <Posts />}
         {view === 'create-post' && <CreatePost onPostCreated={handlePostCreated} />}
     </main>
-}
+};
+
+export default Home;

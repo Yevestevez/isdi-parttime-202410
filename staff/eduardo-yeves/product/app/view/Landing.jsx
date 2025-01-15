@@ -1,21 +1,23 @@
 function Landing(props) {
-    console.log('Landing -> render')
+    console.log('Landing -> render');
 
     const handleRegisterLinkClick = event => {
-        event.preventDefault()
+        event.preventDefault();
 
-        props.onRegisterClicked()
-    }
+        props.onRegisterClicked();
+    };
 
     const handleLoginLinkClick = event => {
-        event.preventDefault()
+        event.preventDefault();
 
-        props.onLoginClicked()
-    }
+        props.onLoginClicked();
+    };
 
     return <main>
         <h2>Welcome!</h2>
 
         <p><a href="" onClick={handleRegisterLinkClick}>Register</a> or <a href="" onClick={handleLoginLinkClick}>Login</a></p>
     </main>
-}
+};
+
+export default Landing;

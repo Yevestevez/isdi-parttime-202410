@@ -1,4 +1,4 @@
-logic.getPosts = () => {
+const getPosts = () => {
     return fetch('http://localhost:8080/posts', {
         method: 'GET',
         headers: {
@@ -7,17 +7,19 @@ logic.getPosts = () => {
     })
         .catch(error => { throw new Error(error.message) })
         .then(res => {
-            const { status } = res
+            const { status } = res;
 
             if (status === 200)
                 return res.json()
-                    .then(posts => posts)
+                    .then(posts => posts);
 
             return res.json()
                 .then(body => {
-                    const { error, message } = body
+                    const { error, message } = body;
 
-                    throw new Error(message)
-                })
-        })
-}
+                    throw new Error(message);
+                });
+        });
+};
+
+export default getPosts;

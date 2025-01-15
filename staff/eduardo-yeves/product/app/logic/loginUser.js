@@ -1,6 +1,8 @@
-logic.loginUser = (username, password) => {
-    validate.username(username)
-    validate.password(password)
+import validate from './helper/validate';
+
+const loginUser = (username, password) => {
+    validate.username(username);
+    validate.password(password);
 
     return fetch('http://localhost:8080/users/auth',
         {
@@ -28,4 +30,6 @@ logic.loginUser = (username, password) => {
                     throw new Error(message);
                 });
         });
-}
+};
+
+export default loginUser;
