@@ -1,0 +1,80 @@
+.Landing {
+    margin: 0;
+}
+
+.Landing-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 180px;
+    margin: 0;
+    background-color: #AEF8DB;
+    color: white;
+}
+
+.Landing-logo {
+    display: flex;
+    font-size: 42px;
+    font-weight: bolder;
+}
+
+.Landing-welcome {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #AEF8DB;
+    margin-top: -5px;
+    padding-left: 15px;
+}
+
+.Landing-welcome span {
+    font-size: 70px;
+    font-weight: bolder;
+    line-height: 0.7;
+}
+
+.Landing-welcome span:nth-child(1) {
+    opacity: 1;
+}
+
+.Landing-welcome span:nth-child(2) {
+    opacity: 0.75;
+}
+
+.Landing-welcome span:nth-child(3) {
+    opacity: 0.5;
+}
+
+.Landing-welcome span:nth-child(4) {
+    opacity: 0.25;
+}
+
+.Landing-buttons {
+    margin-top: 100px;
+}
+
+.Landing-button {
+    display: flex;
+    justify-content: center;
+    background-color: #AEF8DB;
+    color: white;
+    text-decoration: none;
+    padding: 10px 50px;
+    border-radius: 5px;
+    font-size: 20px;
+    margin: 20px 50px;
+    transition: background-color 0.3s ease;
+}
+
+.Landing-button:hover {
+    background-color: #81ffcd;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+.Landing-button:active {
+    background-color: #5ed9b2;
+    transform: translateY(2px);
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
+}

@@ -1,3 +1,5 @@
+import './Register.css';
+
 import logic from '../logic';
 
 function Register(props) {
@@ -38,28 +40,40 @@ function Register(props) {
         props.onLoginClicked();
     };
 
-    return <main>
-        <h2>Register</h2>
+    return <div className="Register">
+        <header className="Register-header">
+            <h1 className="Register-logo">TheGreenApp🌱</h1>
+        </header>
 
-        <form onSubmit={handleFormSubmit}>
+        <main className="Register-content">
+            <h2 className="Register-title">Register</h2>
 
-            <label htmlFor="name">Name</label>
-            <input type="text" id="name" />
+            <form onSubmit={handleFormSubmit} className="Register-form">
 
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" />
+                <label htmlFor="name">Name</label>
+                <input type="text" id="name" />
 
-            <label htmlFor="username">Username</label>
-            <input type="text" id="username" />
+                <label htmlFor="email">Email</label>
+                <input type="email" id="email" />
 
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" />
+                <label htmlFor="username">Username</label>
+                <input type="text" id="username" />
 
-            <button type="submit">Register</button>
-        </form>
+                <label htmlFor="password">Password</label>
+                <input type="password" id="password" />
 
-        <a href="" onClick={handleLoginLinkClick}>Login</a>
-    </main>
+                <div className="Register-button-container">
+                    <button className="Register-button" type="submit">Register</button>
+                </div>
+            </form>
+
+            <a href="" className="Register-LoginLink" onClick={handleLoginLinkClick}>Login</a>
+        </main>
+
+        <footer>
+            <p>Lorem ipsum dolor si amet</p>
+        </footer>
+    </div>
 };
 
 export default Register;

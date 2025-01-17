@@ -1,3 +1,5 @@
+import './Home.css';
+
 import { useState, useEffect } from 'react';
 
 import logic from '../logic';
@@ -44,18 +46,22 @@ function Home(props) {
 
     console.log('Home -> render');
 
-    return <main>
-        <h2>Home</h2>
+    return <div className="Home">
+        <header className="Home-header">
+            <h1 className="Home-logo">TGA🌱</h1>
+            <h3 className="Home-username">{name}</h3>
+            <button type="button" className="Home-logoutButton" onClick={handleLogoutButtonClick}>Logout</button>
+        </header>
 
-        <h3>Hello, {name}!</h3>
+        <main className="Home-content">
+            {view === 'posts' && <Posts />}
+            {view === 'create-post' && <CreatePost onPostCreated={handlePostCreated} />}
+        </main>
 
-        <button type="button" onClick={handleLogoutButtonClick}>Logout</button>
-
-        <button type="button" onClick={handleCreatePostButtonClick}>+</button>
-
-        {view === 'posts' && <Posts />}
-        {view === 'create-post' && <CreatePost onPostCreated={handlePostCreated} />}
-    </main>
+        <footer className="Home-footer">
+            <button type="button" className="Home-createPostButton" onClick={handleCreatePostButtonClick}>+</button>
+        </footer>
+    </div>
 };
 
 export default Home;

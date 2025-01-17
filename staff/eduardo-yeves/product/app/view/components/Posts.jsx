@@ -1,3 +1,5 @@
+import './Posts.css';
+
 import { useState, useEffect } from 'react';
 
 import logic from '../../logic';
@@ -32,7 +34,7 @@ function Posts() {
 
     console.log('Posts -> render');
 
-    return <section>
+    return <section className="Posts">
         {posts.map(post => <Post key={post.id} post={post} onPostDeleted={handlePostDeleted} />)}
     </section>
 };

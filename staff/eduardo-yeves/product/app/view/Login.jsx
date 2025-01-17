@@ -1,3 +1,5 @@
+import './Login.css';
+
 import logic from '../logic';
 
 function Login(props) {
@@ -36,20 +38,31 @@ function Login(props) {
         props.onRegisterClicked();
     }
 
-    return <main>
-        <h2>Login</h2>
-        <form onSubmit={handleFormSubmit}>
-            <label htmlFor="username">Username</label>
-            <input type="text" id="username" />
+    return <div className="Login">
+        <header className="Login-header">
+            <h1 className="Login-logo">TheGreenApp🌱</h1>
+        </header>
+        <main className="Login-content">
+            <h2 className="Login-title">Login</h2>
+            <form onSubmit={handleFormSubmit} className="Login-form">
+                <label htmlFor="username">Username</label>
+                <input type="text" id="username" />
 
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" />
+                <label htmlFor="password">Password</label>
+                <input type="password" id="password" />
 
-            <button type="submit">Login</button>
-        </form>
+                <div className="Login-button-container">
+                    <button className="Login-button" type="submit">Login</button>
+                </div>
+            </form>
 
-        <a href="" onClick={handleRegisterLinkClick}>Register</a>
-    </main>
+            <a href="" className="Login-RegisterLink" onClick={handleRegisterLinkClick}>Register</a>
+        </main>
+        <footer>
+            <p>Lorem ipsum dolor si amet</p>
+        </footer>
+    </div>
+
 };
 
 export default Login;
