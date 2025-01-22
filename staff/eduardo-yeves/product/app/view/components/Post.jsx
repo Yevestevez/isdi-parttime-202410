@@ -2,6 +2,8 @@ import './Post.css';
 
 import logic from '../../logic';
 
+import formatDate from '../helper/formatDate';
+
 function Post(props) {
     const handleDeleteButtonClick = () => {
         if (confirm('Delete post?'))
@@ -29,7 +31,7 @@ function Post(props) {
         <div className="Post-bottom">
             <div className="Post-content">
                 <p className="Post-text">{props.post.text}</p>
-                <time className="Post-date">{props.post.date}</time>
+                <time className="Post-date">{formatDate(props.post.date)}</time>
             </div>
 
             <div className="Post-deletePostButton-container">

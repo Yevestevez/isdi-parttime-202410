@@ -1,3 +1,5 @@
+import './CreatePost.css';
+
 import logic from '../../logic';
 
 function CreatePost(props) {
@@ -24,6 +26,8 @@ function CreatePost(props) {
         };
     };
 
+    const handleCancelButtonClick = () => props.onCancel()
+
     console.log('CreatePost -> render');
 
     return <section>
@@ -36,8 +40,10 @@ function CreatePost(props) {
             <label htmlFor="text">Text</label>
             <input type="text" id='text' />
 
-            <button type="submit">Create</button>
+            <button className="CreatePost-createButton" type="submit">Create</button>
         </form>
+
+        <button className="invert w-full" onClick={handleCancelButtonClick}>Cancel</button>
     </section>
 };
 
