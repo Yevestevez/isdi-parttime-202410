@@ -1,5 +1,5 @@
 import validate from './helper/validate.js';
-import { user } from '../data/models.js';
+import { User } from '../data/models.js';
 
 const registerUser = (name, email, username, password) => {
     validate.username(username);
@@ -7,7 +7,7 @@ const registerUser = (name, email, username, password) => {
     validate.name(name);
     validate.email(email);
 
-    const user = new UserActivation({ name, email, username, password });
+    const user = new User({ name, email, username, password });
 
     return user.save()
         .then(user => { });
