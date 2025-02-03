@@ -3,7 +3,6 @@ import './Post.css';
 import logic from '../../logic';
 
 import formatDate from '../helper/formatDate';
-import createPost from '../../logic/createPost';
 
 function Post(props) {
     const handleDeleteButtonClick = () => {

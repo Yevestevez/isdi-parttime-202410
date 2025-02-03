@@ -6,7 +6,7 @@ const deletePost = (userId, postId) => {
     validate.id(postId, 'postId');
 
     return User.findById(userId)
-        .then(() => {
+        .then((user) => {
             if (!user) throw new Error('user not found');
 
             return Post.findById(postId);

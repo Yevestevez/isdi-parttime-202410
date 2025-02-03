@@ -1,16 +1,20 @@
 import mongoose from 'mongoose';
 import express from 'express';
 import cors from 'cors';
+import jwt from 'jsonwebtoken';
 
 import logic from './logic/index.js';
 
 const PORT = 8080;
+const SECRET = 'esto es un secreto para crear un token';
 
 const connectToDb = () => mongoose.connect('mongodb://localhost:27017/test').then(() => console.log('DB connected'));
 
 const startApi = () => {
     const api = express();
+
     const jsonBodyParser = express.json();
+
     api.use(cors());
 
     api.get('/', (req, res) => res.send('Hello API!'));
@@ -32,7 +36,13 @@ const startApi = () => {
             const { username, password } = req.body;
 
             logic.authenticateUser(username, password)
-                .then(userId => res.json(userId))
+                .then(userId => {
+                    const payload = { sub: userId };
+
+                    const token = jwt.sign(payload, SECRET);
+
+                    res.json(token);
+                })
                 .catch(error => res.status(400).json({ error: error.constructor.name, message: error.message }))
         } catch (error) {
             res.status(400).json({ error: error.constructor.name, message: error.message });
@@ -41,7 +51,12 @@ const startApi = () => {
 
     api.get('/users', (req, res) => {
         try {
-            const userId = req.headers.authorization.slice(6);
+            const token = req.headers.authorization.slice(7); // Bearer token
+
+            const payload = jwt.verify(token, SECRET);
+
+            const { sub: userId } = payload;
+
             logic.getUserName(userId)
                 .then(name => res.json(name))
                 .catch(error => res.status(400).json({ error: error.constructor.name, message: error.message }))
@@ -52,7 +67,11 @@ const startApi = () => {
 
     api.get('/posts', (req, res) => {
         try {
-            const userId = req.headers.authorization.slice(6);
+            const token = req.headers.authorization.slice(7);
+
+            const payload = jwt.verify(token, SECRET);
+
+            const { sub: userId } = payload;
 
             logic.getPosts(userId)
                 .then(posts => res.json(posts))
@@ -64,7 +83,11 @@ const startApi = () => {
 
     api.post('/posts', jsonBodyParser, (req, res) => {
         try {
-            const userId = req.headers.authorization.slice(6);
+            const token = req.headers.authorization.slice(7);
+
+            const payload = jwt.verify(token, SECRET);
+
+            const { sub: userId } = payload;
 
             const { image, text } = req.body;
 
@@ -78,7 +101,11 @@ const startApi = () => {
 
     api.delete('/posts/:postId', jsonBodyParser, (req, res) => {
         try {
-            const userId = req.headers.authorization.slice(6);
+            const token = req.headers.authorization.slice(7);
+
+            const payload = jwt.verify(token, SECRET);
+
+            const { sub: userId } = payload;
 
             const { postId } = req.params;
 

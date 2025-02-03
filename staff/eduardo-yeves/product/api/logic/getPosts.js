@@ -22,9 +22,11 @@ const getPosts = userId => {
 
                             delete post.author._id;
                         };
+
+                        post.own = userId === post.author.id
                     });
 
-                    return posts
+                    return posts;
                 });
         });
 };

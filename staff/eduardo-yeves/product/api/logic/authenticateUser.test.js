@@ -4,7 +4,7 @@ import authenticateUser from './authenticateUser.js'
 mongoose.connect('mongodb://localhost:27017/test')
     .then(() => {
         try {
-            authenticateUser('pepitogrillo2', '123123123')
+            authenticateUser('pepitogrillo', '123123123')
                 .then(userId => console.log('user aunthenticated', userId))
                 .catch(error => console.error(error));
 
