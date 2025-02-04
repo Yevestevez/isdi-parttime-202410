@@ -28,8 +28,8 @@ function Landing(props) {
         </div>
 
         <main className="Landing-buttons">
-            <a href="" class="button" className="Landing-button" onClick={handleRegisterLinkClick}>Register</a>
-            <a href="" class="button" className="Landing-button" onClick={handleLoginLinkClick}>Login</a>
+            <a href="" className="Landing-button" onClick={handleRegisterLinkClick}>Register</a>
+            <a href="" className="Landing-button" onClick={handleLoginLinkClick}>Login</a>
         </main>
 
         <footer>
