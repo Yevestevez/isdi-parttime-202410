@@ -9,8 +9,8 @@ const deletePost = (userId, postId) => {
     validate.id(postId, 'postId');
 
     return User.findById(userId)
-        .cath(error => { throw new SystemError(error.message) })
-        .then((user) => {
+        .catch(error => { throw new SystemError(error.message) })
+        .then(user => {
             if (!user) throw new NotFoundError('user not found');
 
             return Post.findById(postId)
