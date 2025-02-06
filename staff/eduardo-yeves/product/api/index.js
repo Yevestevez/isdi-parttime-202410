@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import mongoose from 'mongoose';
 import express from 'express';
 import cors from 'cors';
@@ -8,10 +10,7 @@ import errors from './errors/index.js';
 
 const { ValidationError, SystemError, DuplicityError, CredentialsError, NotFoundError } = errors;
 
-const PORT = 8080;
-const SECRET = 'esto es un secreto para crear un token';
-
-const connectToDb = () => mongoose.connect('mongodb://localhost:27017/test').then(() => console.log('DB connected'));
+const connectToDb = () => mongoose.connect(process.env.MONGO_URL).then(() => console.log('DB connected'));
 
 const startApi = () => {
     const api = express();
@@ -52,7 +51,7 @@ const startApi = () => {
                 .then(userId => {
                     const payload = { sub: userId };
 
-                    const token = jwt.sign(payload, SECRET);
+                    const token = jwt.sign(payload, process.env.JWT_SECRET);
 
                     res.json(token);
                 })
@@ -76,7 +75,7 @@ const startApi = () => {
         try {
             const token = req.headers.authorization.slice(7); // Bearer token
 
-            const payload = jwt.verify(token, SECRET);
+            const payload = jwt.verify(token, process.env.JWT_SECRET);
 
             const { sub: userId } = payload;
 
@@ -102,7 +101,7 @@ const startApi = () => {
         try {
             const token = req.headers.authorization.slice(7);
 
-            const payload = jwt.verify(token, SECRET);
+            const payload = jwt.verify(token, process.env.JWT_SECRET);
 
             const { sub: userId } = payload;
 
@@ -128,7 +127,7 @@ const startApi = () => {
         try {
             const token = req.headers.authorization.slice(7);
 
-            const payload = jwt.verify(token, SECRET);
+            const payload = jwt.verify(token, process.env.JWT_SECRET);
 
             const { sub: userId } = payload;
 
@@ -156,7 +155,7 @@ const startApi = () => {
         try {
             const token = req.headers.authorization.slice(7);
 
-            const payload = jwt.verify(token, SECRET);
+            const payload = jwt.verify(token, process.env.JWT_SECRET);
 
             const { sub: userId } = payload;
 
@@ -180,7 +179,7 @@ const startApi = () => {
         }
     });
 
-    api.listen(PORT, () => console.log(`API running on port ${PORT}`));
+    api.listen(process.env.PORT, () => console.log(`API running on port ${process.env.PORT}`));
 };
 
 connectToDb()
