@@ -10,6 +10,6 @@ const errors = {
     NotFoundError,
     SystemError,
     ValidationError
-};
+}
 
 export default errors;

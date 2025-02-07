@@ -1,4 +1,4 @@
-import validate from "./helper/validate";
+import { validate, errors } from 'com';
 
 const registerUser = (name, email, username, password) => {
     validate.username(username);
@@ -23,7 +23,10 @@ const registerUser = (name, email, username, password) => {
                 .then(body => {
                     const { error, message } = body;
 
-                    throw new Error(message);
+                    const constructor = errors[error];
+                    // Usamos constructor para traer la constructora del error desde com/index.js y, a continuación lanzar el error con su mensaje. Con esto conseguimos replicar los errores de la api en app
+
+                    throw new constructor(message);
                 });
         });
 };

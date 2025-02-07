@@ -6,6 +6,10 @@ import logic from '../logic';
 import Posts from './components/Posts';
 import CreatePost from './components/CreatePost';
 
+import { errors } from 'com';
+
+const { NotFoundError, SystemError } = errors;
+
 function Home(props) {
     const [view, setView] = useState('posts');
     const [name, setName] = useState(null);
@@ -17,9 +21,10 @@ function Home(props) {
             logic.getUserName()
                 .then(name => setName(name))
                 .catch(error => {
-                    alert(error.message);
-
-                    console.error(error);
+                    if (error instanceof NotFoundError)
+                        alert(error.message)
+                    else if (error instanceof SystemError)
+                        alert('Sorry, try again later.')
                 })
         } catch (error) {
             alert(error.message);

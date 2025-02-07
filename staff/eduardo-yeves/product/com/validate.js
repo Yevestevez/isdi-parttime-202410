@@ -2,7 +2,7 @@
 // Usaremos estos métodos para validar los inputs de los usuarios (en formularios como login o register) y filtrarlos, lanzando errores si no cumplen las condiciones que necesitemos que cumplan
 // Podemos acceder e invocar a estas funciones como métodos del objeto de esta manera -> ejemplo: validate.username(...)
 
-import errors from '../../errors/index.js';
+import errors from './errors/index.js';
 
 const { ValidationError } = errors;
 
