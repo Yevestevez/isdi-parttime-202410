@@ -6,11 +6,14 @@ import logic from '../logic';
 import Posts from './components/Posts';
 import CreatePost from './components/CreatePost';
 
-import { errors } from 'com';
+import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 
+import { errors } from 'com';
 const { NotFoundError, SystemError } = errors;
 
 function Home(props) {
+    const navigate = useNavigate();
+
     const [view, setView] = useState('posts');
     const [name, setName] = useState(null);
 
@@ -32,6 +35,17 @@ function Home(props) {
             console.error(error);
         }
     }, []);
+
+    useEffect(() => {
+        switch (view) {
+            case 'posts':
+                navigate('/');
+                break;
+            case 'create-post':
+                navigate('/create-post');
+                break;
+        }
+    }, [view]);
 
     const handleLogoutButtonClick = () => {
         try {
@@ -63,8 +77,10 @@ function Home(props) {
         </header>
 
         <main className="Home-content">
-            {view === 'posts' && <Posts />}
-            {view === 'create-post' && <CreatePost onPostCreated={handlePostCreated} onCancel={handleCancelCreatePost} />}
+            <Routes>
+                <Route path="/" element={<Posts />} />
+                <Route path="/create-post" element={<CreatePost onPostCreated={handlePostCreated} onCancel={handleCancelCreatePost} />} />
+            </Routes>
         </main>
 
         {view !== 'create-post' && <footer className="Home-footer">
