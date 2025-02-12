@@ -41,7 +41,11 @@ const post = new Schema({
         type: Date,
         required: true,
         default: Date.now
-    }
+    },
+    likes: [{
+        type: ObjectId,
+        ref: 'User'
+    }]
 });
 
 const User = model('User', user);
