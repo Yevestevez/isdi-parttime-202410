@@ -5,7 +5,7 @@ import { errors } from 'com';
 
 const { DuplicityError, SystemError } = errors;
 
-function Register(props) {
+function Register({ onUserRegistered, onLoginClicked }) {
     console.log('Register-> render');
 
     const handleFormSubmit = event => {
@@ -23,10 +23,9 @@ function Register(props) {
                 .then(() => {
                     form.reset();
 
-                    props.onUserRegistered();
+                    onUserRegistered();
                 })
                 .catch(error => {
-                    //alert(error.message);
                     if (error instanceof DuplicityError)
                         alert(error.message)
                     else if (error instanceof SystemError)
@@ -44,7 +43,7 @@ function Register(props) {
     const handleLoginLinkClick = event => {
         event.preventDefault();
 
-        props.onLoginClicked();
+        onLoginClicked();
     };
 
     return <div className="Register">

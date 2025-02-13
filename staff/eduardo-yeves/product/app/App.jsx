@@ -22,9 +22,13 @@ function App() {
     console.log('App -> render');
 
     const handleRegisterClick = () => setView('register');
+
     const handleLoginClick = () => setView('login');
+
     const handleUserLoggedIn = () => setView('home');
+
     const handleUserRegistered = () => setView('login');
+
     const handleUserLoggedOut = () => setView('login');
 
     useEffect(() => {
@@ -45,10 +49,21 @@ function App() {
     }, [view]);
 
     return <Routes>
-        <Route path="/landing" element={logic.isUserLoggedIn() ? <Navigate to="/" /> : <Landing onRegisterClicked={handleRegisterClick} onLoginClicked={handleLoginClick} />} />
-        <Route path="/login" element={logic.isUserLoggedIn() ? <Navigate to="/" /> : <Login onRegisterClicked={handleRegisterClick} onUserLoggedIn={handleUserLoggedIn} />} />
-        <Route path="/register" element={logic.isUserLoggedIn() ? <Navigate to="/" /> : <Register onLoginClicked={handleLoginClick} onUserRegistered={handleUserRegistered} />} />
-        <Route path="/*" element={logic.isUserLoggedIn() ? <Home onUserLoggedOut={handleUserLoggedOut} /> : <Navigate to="/landing" />} />
+        <Route path="/landing" element={
+            logic.isUserLoggedIn() ? <Navigate to="/" /> : <Landing onRegisterClicked={handleRegisterClick} onLoginClicked={handleLoginClick} />
+        } />
+
+        <Route path="/login" element={
+            logic.isUserLoggedIn() ? <Navigate to="/" /> : <Login onRegisterClicked={handleRegisterClick} onUserLoggedIn={handleUserLoggedIn} />
+        } />
+
+        <Route path="/register" element={
+            logic.isUserLoggedIn() ? <Navigate to="/" /> : <Register onLoginClicked={handleLoginClick} onUserRegistered={handleUserRegistered} />
+        } />
+
+        <Route path="/*" element={
+            logic.isUserLoggedIn() ? <Home onUserLoggedOut={handleUserLoggedOut} /> : <Navigate to="/landing" />
+        } />
     </Routes>
 };
 

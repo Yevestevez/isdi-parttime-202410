@@ -45,6 +45,10 @@ const post = new Schema({
     likes: [{
         type: ObjectId,
         ref: 'User'
+    }],
+    likes: [{
+        type: ObjectId,
+        ref: 'User'
     }]
 });
 

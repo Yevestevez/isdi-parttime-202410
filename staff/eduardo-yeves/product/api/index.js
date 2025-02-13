@@ -8,7 +8,7 @@ import jwt from 'jsonwebtoken';
 import logic from './logic/index.js';
 import { errors } from 'com';
 
-const { ValidationError, SystemError, DuplicityError, CredentialsError, NotFoundError } = errors;
+const { ValidationError, SystemError, DuplicityError, CredentialsError, NotFoundError, OwnershipError } = errors;
 
 const connectToDb = () => mongoose.connect(process.env.MONGO_URL).then(() => console.log('DB connected'));
 
@@ -166,6 +166,8 @@ const startApi = () => {
                 .catch(error => {
                     if (error instanceof NotFoundError)
                         res.status(404).json({ error: error.constructor.name, message: error.message })
+                    else if (error instanceof OwnershipError)
+                        res.status(403).json({ error: error.constructor.name, message: error.message })
                     else if (error instanceof SystemError)
                         res.status(500).json({ error: error.constructor.name, message: error.message })
                     else
@@ -178,6 +180,65 @@ const startApi = () => {
                 res.status(500).json({ error: SystemError.name, message: error.message })
         }
     });
+
+    api.patch('/posts/:postId/likes', (req, res) => {
+        try {
+            const token = req.headers.authorization.slice(7);
+
+            const payload = jwt.verify(token, process.env.JWT_SECRET);
+
+            const { sub: userId } = payload;
+
+            const { postId } = req.params;
+
+            logic.toggleLikePost(userId, postId)
+                .then(() => res.status(204).send())
+                .catch(error => {
+                    if (error instanceof NotFoundError)
+                        res.status(404).json({ error: error.constructor.name, message: error.message })
+                    else if (error instanceof SystemError)
+                        res.status(500).json({ error: error.constructor.name, message: error.message })
+                    else
+                        res.status(500).json({ error: SystemError.name, message: error.message })
+                })
+        } catch (error) {
+            if (error instanceof ValidationError)
+                res.status(400).json({ error: error.constructor.name, message: error.message })
+            else
+                res.status(500).json({ error: SystemError.name, message: error.message })
+        }
+    })
+
+    api.patch('/posts/:postId/text', jsonBodyParser, (req, res) => {
+        try {
+            const token = req.headers.authorization.slice(7);
+
+            const payload = jwt.verify(token, process.env.JWT_SECRET);
+
+            const { sub: userId } = payload;
+
+            const { postId } = req.params;
+            const { text } = req.body;
+
+            logic.updatePostText(userId, postId, text)
+                .then(() => res.status(204).send())
+                .catch(error => {
+                    if (error instanceof NotFoundError)
+                        res.status(404).json({ error: error.constructor.name, message: error.message })
+                    else if (error instanceof OwnershipError)
+                        res.status(403).json({ error: error.constructor.name, message: error.message })
+                    else if (error instanceof SystemError)
+                        res.status(500).json({ error: error.constructor.name, message: error.message })
+                    else
+                        res.status(500).json({ error: SystemError.name, message: error.message })
+                })
+        } catch (error) {
+            if (error instanceof ValidationError)
+                res.status(400).json({ error: error.constructor.name, message: error.message })
+            else
+                res.status(500).json({ error: SystemError.name, message: error.message })
+        }
+    })
 
     api.listen(process.env.PORT, () => console.log(`API running on port ${process.env.PORT}`));
 };

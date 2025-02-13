@@ -32,11 +32,21 @@ function Posts() {
 
     const handlePostDeleted = () => loadPosts();
 
+    const handlePostLikedToggled = () => loadPosts();
+
+    const handlePostTextEdited = () => loadPosts();
+
     console.log('Posts -> render');
 
-    return <section className="Posts">
-        {posts.map(post => <Post key={post.id} post={post} onPostDeleted={handlePostDeleted} />)}
-    </section>
+    return <main className="Posts">
+        {posts.map(post => <Post
+            key={post.id}
+            post={post}
+            onPostDeleted={handlePostDeleted}
+            onPostLikeToggled={handlePostLikedToggled}
+            onPostTextEdited={handlePostTextEdited}
+        />)}
+    </main>
 };
 
 export default Posts;

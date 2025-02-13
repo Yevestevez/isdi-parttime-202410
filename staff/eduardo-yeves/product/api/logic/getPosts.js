@@ -6,7 +6,6 @@ const { SystemError, NotFoundError } = errors;
 const getPosts = userId => {
     validate.id(userId, 'userId');
 
-
     return User.findById(userId)
         .catch(error => { throw new SystemError(error.message) })
         .then(user => {
@@ -27,7 +26,10 @@ const getPosts = userId => {
                             delete post.author._id;
                         };
 
-                        post.own = userId === post.author.id
+                        post.own = userId === post.author.id;
+
+                        post.liked = post.likes.some(userObjectId => userObjectId.toString() === userId);
+                        post.likes = post.likes.length;
                     });
 
                     return posts;

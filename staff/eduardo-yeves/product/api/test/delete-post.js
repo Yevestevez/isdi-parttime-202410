@@ -2,7 +2,6 @@ fetch('http://localhost/posts', {
     method: 'DELETE',
     headers: { Authorization: 'Basic m2w92r8h09' }
 })
-
     .then(res => {
         const { status } = res;
 

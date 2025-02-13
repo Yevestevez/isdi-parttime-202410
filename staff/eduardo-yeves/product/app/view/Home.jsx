@@ -11,7 +11,7 @@ import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-
 import { errors } from 'com';
 const { NotFoundError, SystemError } = errors;
 
-function Home(props) {
+function Home({ onUserLoggedOut }) {
     const navigate = useNavigate();
 
     const [view, setView] = useState('posts');
@@ -51,7 +51,7 @@ function Home(props) {
         try {
             logic.logoutUser();
 
-            props.onUserLoggedOut();
+            onUserLoggedOut();
         } catch (error) {
             alert(error.message);
 
