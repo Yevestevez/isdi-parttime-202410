@@ -9,7 +9,7 @@ const { CredentialsError } = errors;
 
 import authenticateUser from './authenticateUser.js';
 
-describe('autehticateUser', () => {
+describe('authenticateUser', () => {
     before(() => mongoose.connect(process.env.TEST_MONGO_URL));
 
     beforeEach(() => User.deleteMany());
@@ -34,7 +34,7 @@ describe('autehticateUser', () => {
         return User.create({ name: 'Pepito Grillo', email: 'pepito@grillo.com', username: 'pepitogrillo', password: '123123123' })
             .then(() => authenticateUser('pepitogrill', '123123123'))
             .catch(error => catchedError = error)
-            .then(() => {
+            .finally(() => {
                 expect(catchedError).instanceOf(CredentialsError);
                 expect(catchedError.message).to.be.equal('wrong credentials');
             })
@@ -46,7 +46,7 @@ describe('autehticateUser', () => {
         return User.create({ name: 'Pepito Grillo', email: 'pepito@grillo.com', username: 'pepitogrillo', password: '123123123' })
             .then(() => authenticateUser('pepitogrillo', '12312312'))
             .catch(error => catchedError = error)
-            .then(() => {
+            .finally(() => {
                 expect(catchedError).instanceOf(CredentialsError);
                 expect(catchedError.message).to.be.equal('wrong credentials');
             })
@@ -54,5 +54,5 @@ describe('autehticateUser', () => {
 
     afterEach(() => User.deleteMany());
 
-    after(() => mongoose.disconnect);
+    after(() => mongoose.disconnect());
 })
