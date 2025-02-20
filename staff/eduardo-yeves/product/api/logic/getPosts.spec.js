@@ -16,7 +16,7 @@ describe('getPosts', () => {
     beforeEach(() => Promise.all([User.deleteMany(), Post.deleteMany()]));
 
     it('succeeds on existing user and posts', () => {
-        const user1 = new User({ name: 'Campa Nilla', emain: 'campa@nilla.com', username: 'campanilla', password: '123123123' });
+        const user1 = new User({ name: 'Campa Nilla', email: 'campa@nilla.com', username: 'campanilla', password: '123123123' });
         const user2 = new User({ name: 'Peter Pan', email: 'peter@pan.com', username: 'peterpan', password: '123123123' });
 
         const post1 = new Post({ author: user1._id, image: 'https://image.com/1', text: 'hello post 1', likes: [user1._id, user2._id] });
@@ -47,11 +47,11 @@ describe('getPosts', () => {
                         const post2b = posts.find(post => post.id === post2.id);
                         expect(post2b.author.id).to.equal(user2.id);
                         expect(post2b.author.username).to.equal(user2.username);
-                        expect(post2b.image).to.equal(user2.image);
+                        expect(post2b.image).to.equal(post2.image);
                         expect(post2b.text).to.equal(post2.text);
                         expect(post2b.own).to.be.false;
                         expect(post2b.liked).to.be.false;
-                        expect(post2.likes).to.equal(0);
+                        expect(post2b.likes).to.equal(0);
 
                         const post3b = posts.find(post => post.id === post3.id);
                         expect(post3b.author.id).to.equal(user1.id);
