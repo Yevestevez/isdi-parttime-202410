@@ -7,6 +7,8 @@ import { User } from '../data/models.js';
 import { errors } from 'com';
 const { DuplicityError } = errors;
 
+import bcrypt from 'bcryptjs';
+
 import registerUser from './registerUser.js';
 
 describe('registerUser', () => {
@@ -25,19 +27,25 @@ describe('registerUser', () => {
                 expect(user.name).to.equal('Peter Pan');
                 expect(user.email).to.equal('peter@pan.com');
                 expect(user.username).to.equal('peterpan');
-                expect(user.password).to.equal('123123123');
+                // expect(user.password).to.equal('123123123');
+
+                return bcrypt.compare('123123123', user.password)
+                    .then(match => expect(match).to.be.true)
             })
     })
 
     it('fails on existing user', () => {
         let catchedError;
 
-        return User.create({ name: 'Wendy Darling', email: 'Wendy@darlin.com', username: 'wendydarling', password: '123123123' })
-            .then(() => registerUser('Wendy Darling', 'wendy@darling.com', 'wendydarling', '123123123'))
-            .catch(error => catchedError = error)
-            .finally(() => {
-                expect(catchedError).to.be.instanceOf(DuplicityError);
-                expect(catchedError.message).to.equal('user already exists');
+        return bcrypt.hash('123123123', 10)
+            .then(hash => {
+                return User.create({ name: 'Wendy Darling', email: 'Wendy@darlin.com', username: 'wendydarling', password: hash })
+                    .then(() => registerUser('Wendy Darling', 'wendy@darling.com', 'wendydarling', '123123123'))
+                    .catch(error => catchedError = error)
+                    .finally(() => {
+                        expect(catchedError).to.be.instanceOf(DuplicityError);
+                        expect(catchedError.message).to.equal('user already exists');
+                    })
             })
     })
 
