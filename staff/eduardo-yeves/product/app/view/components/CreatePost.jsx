@@ -2,7 +2,11 @@ import './CreatePost.css';
 
 import logic from '../../logic';
 
+import { useAppContext } from '../../context';
+
 function CreatePost(props) {
+    const { alert } = useAppContext();
+
     const handleFormSubmit = event => {
         event.preventDefault();
 

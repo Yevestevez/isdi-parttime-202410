@@ -5,8 +5,12 @@ import { errors } from 'com';
 
 const { CredentialsError, SystemError } = errors;
 
+import { useAppContext } from '../context';
+
 function Login({ onUserLoggedIn, onRegisterClicked }) {
     console.log('Login -> render');
+
+    const { alert } = useAppContext();
 
     const handleFormSubmit = event => {
         event.preventDefault();

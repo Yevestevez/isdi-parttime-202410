@@ -11,8 +11,12 @@ import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-
 import { errors } from 'com';
 const { NotFoundError, SystemError } = errors;
 
+import { useAppContext } from '../context';
+
 function Home({ onUserLoggedOut }) {
     const navigate = useNavigate();
+
+    const { alert } = useAppContext();
 
     const [view, setView] = useState('posts');
     const [name, setName] = useState(null);
