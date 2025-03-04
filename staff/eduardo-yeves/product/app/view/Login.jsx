@@ -43,27 +43,27 @@ function Login({ onUserLoggedIn, onRegisterClicked }) {
     }
 
     return <div className="Login">
-        <header className="Login-header">
-            <h1 className="Login-logo">TheGreenApp🌱</h1>
+        <header className="flex justify-center h-30 bg-main-color text-center text-white text-4xl font-bold items-center">
+            <h1>TheGreenApp🌱</h1>
         </header>
-        <main className="Login-content">
+        <main className="flex flex-col m-10">
             <h2 className="Login-title">Login</h2>
-            <form onSubmit={handleFormSubmit} className="Login-form">
-                <label htmlFor="username">Username</label>
-                <input type="text" id="username" />
+            <form onSubmit={handleFormSubmit} className="form">
+                <label className="label" htmlFor="username">Username</label>
+                <input className="input" type="text" id="username" />
 
-                <label htmlFor="password">Password</label>
-                <input type="password" id="password" />
+                <label className="label" htmlFor="password">Password</label>
+                <input className="input" type="password" id="password" />
 
-                <div className="Login-button-container">
-                    <button className="Login-button" type="submit">Login</button>
+                <div className="pt-5 flex justify-end">
+                    <button className="button" type="submit">Login</button>
                 </div>
             </form>
 
-            <a href="" className="Login-RegisterLink" onClick={handleRegisterLinkClick}>Register</a>
+            <a href="" className="-mt-15 underline underline-offset-2 cursor-pointer text-base hover:text-second-color w-20" onClick={handleRegisterLinkClick}>Register</a>
         </main>
-        <footer>
-            <p>Lorem ipsum dolor si amet</p>
+        <footer className="flex fixed bottom-0 justify-center items-center bg-main-color w-full h-15 ">
+            <p className="text-xs">Lorem ipsum dolor si amet</p>
         </footer>
     </div>
 

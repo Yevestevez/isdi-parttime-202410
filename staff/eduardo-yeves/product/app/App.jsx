@@ -7,6 +7,8 @@ import Login from './view/Login';
 import Register from './view/Register';
 import Home from './view/Home';
 
+import Alert from './view/components/Alert';
+
 import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 
 function App() {
@@ -48,23 +50,27 @@ function App() {
         }
     }, [view]);
 
-    return <Routes>
-        <Route path="/landing" element={
-            logic.isUserLoggedIn() ? <Navigate to="/" /> : <Landing onRegisterClicked={handleRegisterClick} onLoginClicked={handleLoginClick} />
-        } />
+    return <>
+        <Routes>
+            <Route path="/landing" element={
+                logic.isUserLoggedIn() ? <Navigate to="/" /> : <Landing onRegisterClicked={handleRegisterClick} onLoginClicked={handleLoginClick} />
+            } />
 
-        <Route path="/login" element={
-            logic.isUserLoggedIn() ? <Navigate to="/" /> : <Login onRegisterClicked={handleRegisterClick} onUserLoggedIn={handleUserLoggedIn} />
-        } />
+            <Route path="/login" element={
+                logic.isUserLoggedIn() ? <Navigate to="/" /> : <Login onRegisterClicked={handleRegisterClick} onUserLoggedIn={handleUserLoggedIn} />
+            } />
 
-        <Route path="/register" element={
-            logic.isUserLoggedIn() ? <Navigate to="/" /> : <Register onLoginClicked={handleLoginClick} onUserRegistered={handleUserRegistered} />
-        } />
+            <Route path="/register" element={
+                logic.isUserLoggedIn() ? <Navigate to="/" /> : <Register onLoginClicked={handleLoginClick} onUserRegistered={handleUserRegistered} />
+            } />
 
-        <Route path="/*" element={
-            logic.isUserLoggedIn() ? <Home onUserLoggedOut={handleUserLoggedOut} /> : <Navigate to="/landing" />
-        } />
-    </Routes>
+            <Route path="/*" element={
+                logic.isUserLoggedIn() ? <Home onUserLoggedOut={handleUserLoggedOut} /> : <Navigate to="/landing" />
+            } />
+        </Routes>
+
+        {/* <Alert /> */}
+    </>
 };
 
 export default App;

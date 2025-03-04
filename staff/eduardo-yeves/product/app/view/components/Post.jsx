@@ -72,38 +72,42 @@ function Post({ post, onPostDeleted, onPostLikeToggled, onPostTextEdited }) {
 
     console.log('Post -> render');
 
-    return <article className="Post">
-        <h3 className="Post-author">{post.author.username}</h3>
-        <img className="Post-image" src={post.image} />
+    return <article className="flex flex-col gap-3 p-5">
+        <h3 className="text-main-color font-bold text-xl">{post.author.username}</h3>
+        <img className="rounded-t-sm" src={post.image} />
 
-        <div className="Post-bottom">
-            <div className="Post-content">
+        <div className="bg-main-color -mt-3 flex flex-col p-5">
+            <div>
                 {edit ?
-                    <input className="Post-text" onChange={handlePostTextChange} defaultValue={text} />
+                    <input className="input justify-items-start bg-white flex flex-col w-60" onChange={handlePostTextChange} defaultValue={text} />
                     :
-                    <p className="Post-text">{text}</p>
+                    <p className="text-base">{text}</p>
                 }
-                <time className="Post-date">{formatDate(post.date)}</time>
+                <time className="text-xs">{formatDate(post.date)}</time>
 
-                <button type="button" onClick={handleToggleLikeClick}>{`${post.liked ? '❤️' : '🩶'} (${post.likes})`}</button>
+                <button className="cursor-pointer flex flex-col mt-3 text-lg" type="button" onClick={handleToggleLikeClick}>{`${post.liked ? '❤️' : '🩶'}(${post.likes})`}</button>
             </div>
 
             {post.own && <>
                 {edit ?
-                    <div>
+                    <div className="flex right-5 justify-end space-x-3 text-xl">
                         <button type="button" onClick={handleSavedEditButtonClick}>💾</button><button type="button" onClick={handleCancelEditButtonClick}>❌</button>
                     </div>
                     :
-                    <button type="button" onClick={handleEditButtonClick}>📝</button>
+                    <div className="flex justify-end right-5 space-x-3 text-xl">
+                        <button type="button" onClick={handleEditButtonClick}>📝</button>
+
+                        <button type="button" onClick={handleDeleteButtonClick}>🗑️</button>
+                    </div>
                 }
             </>}
 
-            <div className="Post-deletePostButton-container">
+            {/* <div className="Post-deletePostButton-container">
                 {post.own && <button type="button" className="Post-deletePostButton" onClick={handleDeleteButtonClick}>X</button>}
-            </div>
+            </div> */}
 
         </div>
-    </article>
+    </article >
 };
 
 export default Post;

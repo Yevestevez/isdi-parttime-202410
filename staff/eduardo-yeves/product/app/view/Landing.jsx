@@ -16,24 +16,24 @@ function Landing({ onRegisterClicked, onLoginClicked }) {
     };
 
     return <div className="Landing">
-        <header className="Landing-header">
+        <header className="flex justify-center h-50 bg-main-color text-center text-white text-4xl font-bold items-center">
             <h1 className="Landing-logo">TheGreenApp🌱</h1>
         </header>
 
-        <div className="Landing-welcome">
-            <span>WELCOME!</span>
-            <span>WELCOME!</span>
-            <span>WELCOME!</span>
-            <span>WELCOME!</span>
+        <div className="text-main-color font-bold flex flex-col items-center text-6xl">
+            <span className="-mt-3">WELCOME!</span>
+            <span className="-mt-4">WELCOME!</span>
+            <span className="-mt-4">WELCOME!</span>
+            <span className="-mt-4">WELCOME!</span>
         </div>
 
-        <main className="Landing-buttons">
-            <a href="" className="Landing-button" onClick={handleRegisterLinkClick}>Register</a>
-            <a href="" className="Landing-button" onClick={handleLoginLinkClick}>Login</a>
+        <main className="mt-15 gap-5 flex flex-col justify-center items-center w-full">
+            <a href="" className="button w-70" onClick={handleRegisterLinkClick}>Register</a>
+            <a href="" className="button w-70" onClick={handleLoginLinkClick}>Login</a>
         </main>
 
-        <footer>
-            <p>Lorem ipsum dolor si amet</p>
+        <footer className="flex fixed bottom-0 justify-center items-center bg-main-color w-full h-15">
+            <p className="text-xs">Lorem ipsum dolor si amet</p>
         </footer>
     </div>
 };

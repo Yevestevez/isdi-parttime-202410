@@ -30,20 +30,22 @@ function CreatePost(props) {
 
     console.log('CreatePost -> render');
 
-    return <section>
-        <h3>Create Post</h3>
+    return <section className="m-10 flex flex-col">
+        <h3 className="text-main-color text-2xl font-bold pt-10">Create Post</h3>
 
-        <form onSubmit={handleFormSubmit}>
-            <label htmlFor="image">Image</label>
-            <input type="text" id='image' />
+        <form className="form" onSubmit={handleFormSubmit}>
+            <label className="label" htmlFor="image">Image</label>
+            <input className="input" type="text" id='image' />
 
-            <label htmlFor="text">Text</label>
-            <input type="text" id='text' />
+            <label className="label" htmlFor="text">Text</label>
+            <input className="input" type="text" id='text' />
 
-            <button className="CreatePost-createButton" type="submit">Create</button>
+            <div className="flex justify-end mt-5">
+                <button className="button w-35" type="submit">Create</button>
+            </div>
         </form>
 
-        <button className="invert w-full" onClick={handleCancelButtonClick}>Cancel</button>
+        <button className="button w-35 bg-red-700 hover:bg-red-900 -mt-17" onClick={handleCancelButtonClick}>Cancel</button>
     </section>
 };
 

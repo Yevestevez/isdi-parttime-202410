@@ -47,37 +47,37 @@ function Register({ onUserRegistered, onLoginClicked }) {
     };
 
     return <div className="Register">
-        <header className="Register-header">
-            <h1 className="Register-logo">TheGreenApp🌱</h1>
+        <header className="flex justify-center h-30 bg-main-color text-center text-white text-4xl font-bold items-center">
+            <h1>TheGreenApp🌱</h1>
         </header>
 
-        <main className="Register-content">
-            <h2 className="Register-title">Register</h2>
+        <main className="flex flex-col m-10">
+            <h2 className="text-main-color text-2xl font-bold">Register</h2>
 
-            <form onSubmit={handleFormSubmit} className="Register-form">
+            <form onSubmit={handleFormSubmit} className="form">
 
-                <label htmlFor="name">Name</label>
-                <input type="text" id="name" />
+                <label className="label" htmlFor="name">Name</label>
+                <input className="input" type="text" id="name" />
 
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" />
+                <label className="label" htmlFor="email">Email</label>
+                <input className="input" type="email" id="email" />
 
-                <label htmlFor="username">Username</label>
-                <input type="text" id="username" />
+                <label className="label" htmlFor="username">Username</label>
+                <input className="input" type="text" id="username" />
 
-                <label htmlFor="password">Password</label>
-                <input type="password" id="password" />
+                <label className="label" htmlFor="password">Password</label>
+                <input className="input" type="password" id="password" />
 
-                <div className="Register-button-container">
-                    <button className="Register-button" type="submit">Register</button>
+                <div className="pt-5 flex justify-end">
+                    <button className="button" type="submit">Register</button>
                 </div>
             </form>
 
-            <a href="" className="Register-LoginLink" onClick={handleLoginLinkClick}>Login</a>
+            <a href="" className="-mt-15 underline underline-offset-2 cursor-pointer text-base hover:text-second-color w-20" onClick={handleLoginLinkClick}>Login</a>
         </main>
 
-        <footer>
-            <p>Lorem ipsum dolor si amet</p>
+        <footer className="flex fixed bottom-0 justify-center items-center bg-main-color w-full h-15">
+            <p className="text-xs">Lorem ipsum dolor si amet</p>
         </footer>
     </div>
 };

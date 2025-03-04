@@ -1,6 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-* {
+@import "tailwindcss";
+
+@theme {
+    --font-spacemono: "Space Mono";
+    --color-main-color: #AEF8DB;
+    --color-second-color: #5ed9b2;
+    --color-third-color: #81ffcd;
+}
+
+@layer components {
+    .input {
+        @apply flex justify-items-center border-3 rounded-sm border-main-color px-10 text-base h-10 focus:border-second-color outline-0;
+    }
+
+    .form {
+        @apply flex flex-col gap-2 mb-5 mt-3;
+    }
+
+    .label {
+        @apply mt-3 text-lg;
+    }
+
+    .button {
+        @apply flex justify-center bg-main-color p-3 rounded-sm px-5 text-base font-bold text-white hover:bg-second-color hover:shadow-md active:bg-third-color;
+    }
+
+    .button-invert {
+        @apply flex justify-center bg-white p-3 rounded-sm px-5 text-base font-bold text-main-color hover:bg-second-color hover:shadow-md active:bg-third-color;
+    }
+}
+
+/* * {
     font-family: 'Space Mono', monospace;
 }
 
@@ -58,4 +89,4 @@ button.invert {
 
 .w-full {
     width: 100%;
-}
+} */

@@ -70,21 +70,21 @@ function Home({ onUserLoggedOut }) {
     console.log('Home -> render');
 
     return <div className="Home">
-        <header className="Home-header">
-            <h1 className="Home-logo" onClick={handleLogoClick}>TGA🌱</h1>
-            <h3 className="Home-username">{name}</h3>
-            <button type="button" className="Home-logoutButton" onClick={handleLogoutButtonClick}>Logout</button>
+        <header className="flex justify-between h-10 bg-main-color text-center text-white items-center p-5 fixed top-0 w-full border-b-4 border-white">
+            <h1 className="text-xl" onClick={handleLogoClick}>TGA🌱</h1>
+            <h3 className="text-md font-bold">{name}</h3>
+            <button type="button" className="button-invert h-5 w-18 align-middle items-center text-sm" onClick={handleLogoutButtonClick}>Logout</button>
         </header>
 
-        <main className="Home-content">
+        <main className="my-10">
             <Routes>
                 <Route path="/" element={<Posts />} />
                 <Route path="/create-post" element={<CreatePost onPostCreated={handlePostCreated} onCancel={handleCancelCreatePost} />} />
             </Routes>
         </main>
 
-        {view !== 'create-post' && <footer className="Home-footer">
-            <button type="button" className="Home-createPostButton" onClick={handleCreatePostButtonClick}>+</button>
+        {view !== 'create-post' && <footer className="button flex fixed bottom-0 border-white border-t-4 w-full h-10 align-middle items-center justify-center">
+            <button type="button" className="text-white font-bold text-4xl" onClick={handleCreatePostButtonClick}>+</button>
         </footer>}
     </div>
 };
